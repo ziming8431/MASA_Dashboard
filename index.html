@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Climate Physical Risk &amp; Reinsurance Protection Gap — Philippines vs Vietnam | MASA R-Ignite 2026</title>
+<style>
+  :root{
+    --navy:#0f2a43; --navy2:#163a5f; --ink:#1f2d3d; --muted:#5b6b7b; --line:#dde4ec;
+    --bg:#eef2f6; --card:#ffffff; --phl:#1f6f8b; --vnm:#c47a32;
+    --teal:#2f9c95; --dark:#243746; --amber:#c47a32; --green:#2f9c95;
+    --base:#5b8aa8; --adv:#b5462f; --mit:#2f9c95;
+    --shadow:0 1px 2px rgba(16,24,40,.06), 0 6px 18px rgba(16,24,40,.05);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); font-size:15px; line-height:1.5;}
+  h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif; color:var(--navy); margin:0;}
+  a{color:var(--phl)}
+
+  /* layout */
+  .app{display:flex; min-height:100vh;}
+  .sidebar{width:248px; flex:0 0 248px; background:var(--navy); color:#dbe6f1;
+    position:sticky; top:0; height:100vh; padding:22px 16px; overflow:auto;}
+  .brand{font-family:Georgia,serif; font-size:1.18rem; color:#fff; line-height:1.25;}
+  .brand small{display:block; font-family:"Segoe UI",sans-serif; font-size:.72rem; letter-spacing:.06em;
+    text-transform:uppercase; color:#7fa6c9; margin-top:6px;}
+  .navsec{margin-top:22px; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:#6f93b6;}
+  nav a{display:flex; align-items:center; gap:10px; color:#cfe0f0; text-decoration:none;
+    padding:9px 11px; border-radius:7px; font-size:.92rem; margin-top:4px; cursor:pointer; transition:.15s;}
+  nav a:hover{background:rgba(255,255,255,.07)}
+  nav a.active{background:var(--phl); color:#fff; font-weight:600;}
+  nav a .ic{width:18px; text-align:center; font-size:.95rem; opacity:.9}
+  .sidefoot{margin-top:26px; font-size:.74rem; color:#88a6c4; border-top:1px solid rgba(255,255,255,.12); padding-top:14px;}
+  .legend-chip{display:flex; align-items:center; gap:7px; margin-top:7px; font-size:.8rem;}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  .main{flex:1 1 auto; min-width:0;}
+  .topbar{background:linear-gradient(100deg,var(--navy),var(--navy2));
+    color:#fff; padding:20px 34px; position:sticky; top:0; z-index:5; box-shadow:var(--shadow);}
+  .topbar h1{color:#fff; font-size:1.42rem; line-height:1.2;}
+  .topbar p{margin:6px 0 0; color:#b8cde0; font-size:.9rem;}
+  .topbar .tags{margin-top:11px; display:flex; gap:8px; flex-wrap:wrap}
+  .tag{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); color:#e7f0fa;
+    padding:3px 10px; border-radius:20px; font-size:.74rem;}
+  .content{padding:26px 34px 60px;}
+
+  .view{display:none; animation:fade .25s ease;}
+  .view.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+
+  .lead{color:var(--muted); max-width:1000px; margin:2px 0 20px; font-size:.97rem;}
+  .sectitle{display:flex; align-items:center; gap:10px; margin:30px 0 14px;}
+  .sectitle h2{font-size:1.22rem;}
+  .sectitle .bar{width:4px;height:22px;background:var(--phl);border-radius:3px}
+  .sub{font-size:1.02rem; margin:22px 0 10px; color:var(--navy);}
+
+  /* grid + cards */
+  .grid{display:grid; gap:18px;}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:1fr 1fr}}
+  @media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:18px 18px 16px; box-shadow:var(--shadow);}
+  .card h3{font-size:1.02rem; margin-bottom:3px;}
+  .card .ch-note{color:var(--muted); font-size:.82rem; margin:2px 0 12px;}
+  .span2{grid-column:span 2}
+  @media(max-width:760px){.span2{grid-column:auto}}
+
+  /* KPI tiles */
+  .kpi{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:16px 17px; box-shadow:var(--shadow); position:relative; overflow:hidden;}
+  .kpi:before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--phl);}
+  .kpi.vnm:before{background:var(--vnm)} .kpi.both:before{background:var(--navy)}
+  .kpi .lab{font-size:.76rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted);}
+  .kpi .val{font-family:Georgia,serif; font-size:1.72rem; color:var(--navy); margin-top:5px; line-height:1.05;}
+  .kpi .meta{font-size:.82rem; color:var(--muted); margin-top:5px;}
+  .kpi .meta b{color:var(--phl)} .kpi .meta i{color:var(--vnm); font-style:normal}
+
+  /* boxes */
+  .decision{border-left:4px solid var(--phl); background:#f3f8fb; padding:13px 16px; border-radius:8px; margin:6px 0 4px;}
+  .warn{border-left:4px solid var(--amber); background:#fff8f0; padding:13px 16px; border-radius:8px;}
+  .note{border-left:4px solid var(--teal); background:#f1f9f7; padding:13px 16px; border-radius:8px;}
+  .decision b,.warn b,.note b{color:var(--navy)}
+
+  /* profile cards */
+  .prof{border:1px solid var(--line); border-radius:11px; padding:0; overflow:hidden; background:#fff; box-shadow:var(--shadow);}
+  .prof .hd{padding:14px 17px; color:#fff;}
+  .prof.phl .hd{background:linear-gradient(120deg,#1f6f8b,#2a8aa8)}
+  .prof.vnm .hd{background:linear-gradient(120deg,#b06a28,#c47a32)}
+  .prof .hd h3{color:#fff; font-size:1.12rem}
+  .prof .hd .case{font-size:.84rem; opacity:.92; margin-top:3px}
+  .prof .bd{padding:14px 17px}
+  .prof .row{display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:.9rem;}
+  .prof .row:last-child{border-bottom:0}
+  .prof .row .k{flex:0 0 128px; color:var(--muted); font-weight:600}
+  .prof .row .v{color:var(--ink)}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; font-size:.88rem;}
+  th,td{text-align:left; padding:9px 11px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{background:#f6f9fc; color:var(--navy); font-weight:600; font-size:.78rem; letter-spacing:.03em; text-transform:uppercase;}
+  tbody tr:hover{background:#f7fafc}
+  td .pill{display:inline-block; padding:2px 9px; border-radius:20px; font-size:.74rem; font-weight:600}
+  .pill.phl{background:#e4f0f5; color:#155}
+  .pill.vnm{background:#f6ead9; color:#7a4a14}
+  .pill.both{background:#e9edf2; color:#2c3e50}
+  .pill.sel{background:#dff3ef; color:#1d6b62}
+  .num{font-variant-numeric:tabular-nums}
+  .rank{font-family:Georgia,serif; font-weight:700; color:var(--navy)}
+
+  /* sliders */
+  .controls{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:4px}
+  @media(max-width:760px){.controls{grid-template-columns:1fr}}
+  .ctl label{font-size:.82rem; color:var(--muted); display:flex; justify-content:space-between}
+  .ctl label b{color:var(--navy); font-variant-numeric:tabular-nums}
+  .ctl input[type=range]{width:100%; accent-color:var(--phl); margin-top:7px}
+  .resetbtn{background:#fff;border:1px solid var(--line);border-radius:7px;padding:7px 13px;cursor:pointer;
+    font-size:.82rem;color:var(--navy);box-shadow:var(--shadow)}
+  .resetbtn:hover{background:#f3f6f9}
+
+  svg{display:block; width:100%; height:auto;}
+  .ax{stroke:#c8d3df; stroke-width:1}
+  .grid-l{stroke:#eceff3; stroke-width:1}
+  .axlab{fill:#6b7a8a; font-size:12px; font-family:"Segoe UI",sans-serif}
+  .axttl{fill:#56697b; font-size:12.5px; font-weight:600; font-family:"Segoe UI",sans-serif}
+  .vlab{fill:#33485c; font-size:12px; font-weight:600; font-family:"Segoe UI",sans-serif}
+  .lgd{fill:#46586a; font-size:12.5px; font-family:"Segoe UI",sans-serif}
+  .bar-r{transition:opacity .15s} .bar-r:hover{opacity:.82}
+  .pt:hover{stroke:#0f2a43; stroke-width:2}
+
+  .tip{position:fixed; pointer-events:none; background:#0f2a43; color:#fff; padding:7px 10px;
+    border-radius:7px; font-size:.78rem; line-height:1.35; box-shadow:0 6px 20px rgba(0,0,0,.25);
+    opacity:0; transition:opacity .12s; z-index:50; max-width:240px;}
+  .tip b{color:#9fd0e2}
+  .src{font-size:.8rem; color:var(--muted); margin-top:9px}
+  .footer{margin-top:34px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:.82rem;}
+  .takeaway{margin-top:12px; font-size:.9rem; color:var(--navy); background:#f6f9fc; border:1px solid var(--line);
+    border-radius:8px; padding:11px 14px;}
+  .takeaway b{color:var(--phl)}
+
+  /* assistant */
+  .fab{position:fixed; right:26px; bottom:26px; z-index:60; width:60px; height:60px; border-radius:50%;
+    background:linear-gradient(135deg,#1f6f8b,#163a5f); color:#fff; border:none; cursor:pointer;
+    box-shadow:0 8px 24px rgba(15,42,67,.35); font-size:1.45rem; display:flex; align-items:center; justify-content:center; transition:transform .15s}
+  .fab:hover{transform:scale(1.07)}
+  .fab .pulse{position:absolute; right:-2px; top:-2px; width:14px; height:14px; background:#c47a32; border:2px solid #fff; border-radius:50%}
+  .chat{position:fixed; right:26px; bottom:96px; z-index:61; width:390px; max-width:calc(100vw - 36px);
+    height:580px; max-height:calc(100vh - 130px); background:#fff; border:1px solid var(--line); border-radius:16px;
+    box-shadow:0 22px 54px rgba(15,42,67,.32); display:none; flex-direction:column; overflow:hidden}
+  .chat.open{display:flex; animation:fade .2s ease}
+  .chat .chd{background:linear-gradient(120deg,#0f2a43,#1b4670); color:#fff; padding:14px 16px; display:flex; align-items:center; gap:11px}
+  .chat .chd .av{width:36px;height:36px;border-radius:50%;background:#1f6f8b;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:1rem;flex:0 0 auto}
+  .chat .chd h4{color:#fff;font-size:1rem;font-family:"Segoe UI",sans-serif;font-weight:600;line-height:1.1}
+  .chat .chd small{display:block;color:#9fc0d8;font-size:.74rem;margin-top:2px}
+  .chat .chd .x{margin-left:auto;background:none;border:none;color:#cfe0f0;font-size:1.5rem;cursor:pointer;line-height:1}
+  .chat .body{flex:1;overflow:auto;padding:14px;background:#f4f7fa}
+  .msg{margin-bottom:11px;display:flex}
+  .msg .b{padding:10px 12px;border-radius:13px;font-size:.875rem;line-height:1.5;box-shadow:0 1px 2px rgba(16,24,40,.06);max-width:86%}
+  .msg.bot .b{background:#fff;border:1px solid var(--line);border-top-left-radius:3px;color:var(--ink)}
+  .msg.me{justify-content:flex-end}
+  .msg.me .b{background:#1f6f8b;color:#fff;border-top-right-radius:3px}
+  .msg .b b{color:var(--navy)} .msg.me .b b{color:#fff}
+  .msg .b i{color:var(--vnm);font-style:normal;font-weight:600}
+  .vbtn{display:inline-block;margin-top:9px;background:#eef5f8;border:1px solid #cfe2ea;color:#155;
+    padding:5px 10px;border-radius:7px;font-size:.8rem;cursor:pointer}
+  .vbtn:hover{background:#dcebf2;background:#e0eef3}
+  .chips{padding:2px 14px 10px;background:#f4f7fa;display:flex;flex-wrap:wrap;gap:7px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:20px;padding:6px 11px;font-size:.77rem;color:var(--navy);cursor:pointer}
+  .chip:hover{background:#eef5f8;border-color:#cfe2ea}
+  .chat .foot{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line);background:#fff}
+  .chat .foot input{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:.88rem;outline:none;font-family:inherit}
+  .chat .foot input:focus{border-color:#1f6f8b}
+  .chat .foot button{background:#1f6f8b;border:none;color:#fff;border-radius:9px;padding:0 15px;cursor:pointer;font-size:1.05rem}
+  .chat .foot button:hover{background:#185c74}
+  .chat .dis{font-size:.67rem;color:var(--muted);text-align:center;padding:0 8px 8px;background:#fff}
+  .typing{display:flex;gap:5px;align-items:center;padding:3px 2px}
+  .typing span{width:7px;height:7px;border-radius:50%;background:#9fb4c4;display:inline-block;animation:tbounce 1.2s infinite ease-in-out}
+  .typing span:nth-child(2){animation-delay:.16s} .typing span:nth-child(3){animation-delay:.32s}
+  @keyframes tbounce{0%,80%,100%{transform:translateY(0);opacity:.45}40%{transform:translateY(-5px);opacity:1}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">R&middot;Ignite<small>MASA Hackathon 2026</small></div>
+    <div class="navsec">Dashboard</div>
+    <nav id="nav">
+      <a data-view="overview" class="active"><span class="ic">▦</span>Executive Overview</a>
+      <a data-view="markets"><span class="ic">⚖</span>Two Markets</a>
+      <a data-view="model"><span class="ic">∿</span>Model &amp; Validation</a>
+      <a data-view="projection"><span class="ic">↗</span>2030 GHG Outlook</a>
+      <a data-view="gap"><span class="ic">▥</span>Protection Gap</a>
+      <a data-view="stress"><span class="ic">◉</span>2030 Stress Test</a>
+      <a data-view="strategy"><span class="ic">✦</span>Strategy &amp; Triggers</a>
+      <a data-view="method"><span class="ic">⌗</span>Methodology</a>
+    </nav>
+    <div class="sidefoot">
+      <div style="color:#cfe0f0;font-weight:600">Markets covered</div>
+      <div class="legend-chip"><span class="dot" style="background:var(--phl)"></span>Philippines — frequency &amp; liquidity</div>
+      <div class="legend-chip"><span class="dot" style="background:var(--vnm)"></span>Vietnam — accumulation &amp; transition</div>
+      <div style="margin-top:14px;color:#7fa1c2">Team Proheck888<br/>Data: World Bank WDI · EM-DAT</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <h1>Climate Physical Risk &amp; Reinsurance Protection Gap</h1>
+      <p>A client-facing 2030 stress test for the Philippines and Vietnam — two markets, two distinct reinsurance problems.</p>
+      <div class="tags">
+        <span class="tag">Reinsurance advisory</span>
+        <span class="tag">WDI + EM-DAT</span>
+        <span class="tag">AR fixed-effect GHG model</span>
+        <span class="tag">2030 horizon</span>
+        <span class="tag">Strategic screen, not treaty pricing</span>
+      </div>
+    </header>
+    <div class="content">
+
+      <!-- ===================== OVERVIEW ===================== -->
+      <section class="view active" id="view-overview">
+        <div class="decision">
+          <b>Decision message:</b> Treat the <b>Philippines</b> as a typhoon/flood <b>frequency &amp; liquidity</b> case,
+          and <b>Vietnam</b> as a flood, storm-surge, industrial-<b>accumulation &amp; transition-pressure</b> case.
+          The same "climate-risk" label hides two different underwriting problems — the response should be country-specific, not region-generic.
+        </div>
+
+        <div class="grid g4" style="margin:18px 0 6px">
+          <div class="kpi both"><div class="lab">2030 GHG (transition watchlist)</div><div class="val">338 / 793<span style="font-size:.9rem;color:var(--muted)"> Mt</span></div><div class="meta"><b>PHL 338</b> · <i>VNM 793</i> Mt CO₂e — Vietnam is the larger transition market</div></div>
+          <div class="kpi"><div class="lab">Catastrophe frequency</div><div class="val">327<span style="font-size:.9rem;color:var(--muted)"> events</span></div><div class="meta"><b>Philippines</b> 2000–2024 vs <i>Vietnam 186</i></div></div>
+          <div class="kpi both"><div class="lab">Affected population 2000–2024</div><div class="val">206.9M</div><div class="meta"><b>PHL 206.9M</b> · <i>VNM 46.2M</i> — far larger human-impact burden</div></div>
+          <div class="kpi vnm"><div class="lab">2030 adverse uninsured loss</div><div class="val">$4.56bn</div><div class="meta"><i>Vietnam</i> peak · <b>PHL $1.90bn</b> under stress</div></div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card">
+            <h3>Risk map — transition pressure vs catastrophe frequency</h3>
+            <div class="ch-note">Bubble area = adjusted disaster damage 2000–2024 (USD bn). Two markets, two problems.</div>
+            <div id="ch-riskmap"></div>
+            <div class="takeaway"><b>Read:</b> Vietnam sits far right (transition pressure); the Philippines sits high (event frequency). Different axes of risk → different treaties.</div>
+          </div>
+          <div class="card">
+            <h3>2030 uninsured-loss screen</h3>
+            <div class="ch-note">Projected annual uninsured loss by scenario (USD bn). Default assumptions; tune them in the Stress Test view.</div>
+            <div id="ch-ov-stress"></div>
+            <div class="takeaway"><b>Read:</b> Both markets carry material uninsured-loss pressure; Vietnam's is roughly 2–2.5× the Philippines under every scenario.</div>
+          </div>
+        </div>
+
+        <div class="sectitle"><span class="bar"></span><h2>Headline metrics by market</h2></div>
+        <div class="card span2">
+          <table id="tbl-headline"></table>
+          <div class="src">Sources: World Bank WDI (wide format), EM-DAT hydrological/meteorological/climatological losses (CRED), authors' AR fixed-effect projection &amp; stress test.</div>
+        </div>
+      </section>
+
+      <!-- ===================== MARKETS ===================== -->
+      <section class="view" id="view-markets">
+        <p class="lead">A single Southeast-Asia pricing view would hide the main risk difference. The Philippines and Vietnam both matter — but for different reasons.
+        The client should separate the two markets in underwriting, capital monitoring and product design.</p>
+
+        <div class="grid g2">
+          <div class="prof phl">
+            <div class="hd"><h3>🇵🇭 Philippines</h3><div class="case">Catastrophe frequency &amp; sovereign liquidity</div></div>
+            <div class="bd">
+              <div class="row"><div class="k">Hazard profile</div><div class="v">Recurring typhoon &amp; flood losses → repeated post-event liquidity needs.</div></div>
+              <div class="row"><div class="k">Exposure</div><div class="v">Urban growth, coastal exposure, SME/residential vulnerability.</div></div>
+              <div class="row"><div class="k">Protection gap</div><div class="v">Large share of loss outside private insurance → public-sector &amp; household liquidity gaps.</div></div>
+              <div class="row"><div class="k">Recommended posture</div><div class="v">Parametric typhoon/flood liquidity, public-sector pools, sovereign DRF support.</div></div>
+            </div>
+          </div>
+          <div class="prof vnm">
+            <div class="hd"><h3>🇻🇳 Vietnam</h3><div class="case">Flood accumulation &amp; transition pressure</div></div>
+            <div class="bd">
+              <div class="row"><div class="k">Hazard profile</div><div class="v">Riverine flooding, coastal storm surge, extreme rainfall → correlated losses.</div></div>
+              <div class="row"><div class="k">Exposure</div><div class="v">Manufacturing concentration &amp; supply-chain links → business-interruption.</div></div>
+              <div class="row"><div class="k">Transition</div><div class="v">Projected 793 Mt CO₂e by 2030 — far above the Philippines.</div></div>
+              <div class="row"><div class="k">Recommended posture</div><div class="v">Hybrid indemnity-parametric covers, flood accumulation controls, resilience-linked underwriting.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sectitle"><span class="bar"></span><h2>Why this country pair? — selection scorecard</h2></div>
+        <div class="grid g2">
+          <div class="card">
+            <h3>Pair shortlist (WDI 60% + disaster-loss 40%)</h3>
+            <div class="ch-note">Philippines vs Vietnam ranked #1 of six candidate Southeast-Asia pairs.</div>
+            <table id="tbl-pairs"></table>
+          </div>
+          <div class="card">
+            <h3>Southeast-Asia realised loss context, 2000–2024</h3>
+            <div class="ch-note">Adjusted climate-related disaster damage (USD bn) and event counts (EM-DAT).</div>
+            <div id="ch-seasia"></div>
+          </div>
+        </div>
+
+        <div class="sectitle"><span class="bar"></span><h2>Risk-transfer gaps &amp; recommended posture</h2></div>
+        <div class="card span2">
+          <table id="tbl-posture"></table>
+        </div>
+        <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> The reinsurance response should be country-specific. Fast catastrophe liquidity in the Philippines; accumulation-led flood / storm-surge control in Vietnam.</div>
+      </section>
+
+      <!-- ===================== MODEL ===================== -->
+      <section class="view" id="view-model">
+        <p class="lead">The target variable is <b>total GHG emissions excluding LULUCF (Mt CO₂e)</b>, cleaned from the WDI wide-format export into a
+        country-year panel. Same-year emissions components were excluded as direct predictors to avoid circularity. The model gives
+        <b>strategic scenario context</b> — not treaty-level claim pricing.</p>
+
+        <div class="grid g3" style="margin-bottom:4px">
+          <div class="kpi"><div class="lab">Selected model</div><div class="val" style="font-size:1.16rem;line-height:1.2">Simple AR<br/>fixed-effect</div><div class="meta">Lagged GHG + country fixed effect</div></div>
+          <div class="kpi both"><div class="lab">2024 holdout accuracy</div><div class="val">1.83%<span style="font-size:.9rem;color:var(--muted)"> MAPE</span></div><div class="meta">MAE 8.98 · RMSE 10.87 Mt CO₂e</div></div>
+          <div class="kpi both"><div class="lab">Expanding-window 2015–2024</div><div class="val">3.69%<span style="font-size:.9rem;color:var(--muted)"> MAPE</span></div><div class="meta">Best of six candidate models</div></div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card">
+            <h3>Model assurance — 2024 actual vs predicted</h3>
+            <div class="ch-note">Holdout year. Errors small enough for strategic stress-testing (Mt CO₂e).</div>
+            <div id="ch-validation"></div>
+          </div>
+          <div class="card">
+            <h3>Model selection — expanding-window MAPE</h3>
+            <div class="ch-note">Lower is better. The simple AR fixed-effect model wins on accuracy and interpretability.</div>
+            <div id="ch-modelcomp"></div>
+          </div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card">
+            <h3>Which WDI indicators are most informative?</h3>
+            <div class="ch-note">Correlation with total GHG (excl. LULUCF). Energy use &amp; CO₂ track emissions; renewables move inversely.</div>
+            <div id="ch-corr"></div>
+          </div>
+          <div class="card">
+            <h3>Per-country validation &amp; 2024 snapshot</h3>
+            <table id="tbl-modelmetrics"></table>
+            <div class="src">Multicollinearity check (VIF) confirmed the full OLS panel was unstable (year-index VIF&gt;1000), motivating the parsimonious AR specification.</div>
+          </div>
+        </div>
+        <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> A deliberately simple, validated model beats heavier specifications out-of-sample — and is defensible to a client. Use it for capital, pricing &amp; monitoring context, not to predict individual claims.</div>
+      </section>
+
+      <!-- ===================== PROJECTION ===================== -->
+      <section class="view" id="view-projection">
+        <p class="lead">Historical emissions (1990–2024) and the AR fixed-effect projection to 2030, with a recommended uncertainty cone derived from
+        residual spread and trend bounds. Vietnam remains the larger transition-pressure watchlist market.</p>
+
+        <div class="grid g3" style="margin-bottom:4px">
+          <div class="kpi"><div class="lab">Philippines 2030</div><div class="val">338.5<span style="font-size:.9rem;color:var(--muted)"> Mt</span></div><div class="meta">range 310.5 – 352.6 · +27% vs 2024</div></div>
+          <div class="kpi vnm"><div class="lab">Vietnam 2030</div><div class="val">792.9<span style="font-size:.9rem;color:var(--muted)"> Mt</span></div><div class="meta">range 631.3 – 864.3 · +36% vs 2024</div></div>
+          <div class="kpi both"><div class="lab">Growth since 1990</div><div class="val">+190% / +536%</div><div class="meta"><b>PHL</b> 92→267 · <i>VNM</i> 92→584 Mt CO₂e</div></div>
+        </div>
+
+        <div class="card span2" style="margin-top:18px">
+          <h3>Total GHG excl. LULUCF — history &amp; 2030 projection</h3>
+          <div class="ch-note">Solid = WDI actuals (1990–2024); dashed = AR fixed-effect projection; shaded cone = recommended 2030 uncertainty.</div>
+          <div id="ch-projection"></div>
+        </div>
+        <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> Emissions are a <b>transition-pressure signal</b>, not a claims predictor. Use ranges and trigger-based annual reviews instead of one fixed forecast.</div>
+      </section>
+
+      <!-- ===================== PROTECTION GAP ===================== -->
+      <section class="view" id="view-gap">
+        <p class="lead">The protection gap is the bridge from climate risk to reinsurance opportunity. Public multi-year insured-claims data are not consistently
+        available for both countries, so this uses EM-DAT economic losses with a <b>90% uninsured benchmark</b> as a strategic screen — not a treaty-pricing model.</p>
+
+        <div class="grid g2">
+          <div class="card">
+            <h3>Indicative protection-gap split, 2000–2024</h3>
+            <div class="ch-note">Adjusted disaster damage (USD bn). Uninsured layer = 90% benchmark where public insured-loss data are incomplete.</div>
+            <div id="ch-gap"></div>
+          </div>
+          <div class="card">
+            <h3>Annual loss intensity — damage ÷ GDP (%)</h3>
+            <div class="ch-note">EM-DAT adjusted damage as a share of GDP. Note Vietnam's structurally higher recent intensity.</div>
+            <div id="ch-intensity"></div>
+          </div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card">
+            <table id="tbl-gap"></table>
+          </div>
+          <div class="warn">
+            <b>Why a 90% benchmark?</b> Public, multi-year insured-claims data are not consistently available for both countries.
+            The dashboard therefore uses EM-DAT economic losses and an emerging-market uninsured benchmark as a <b>strategic reinsurance screen</b>.
+            Treaty pricing would require cedant-level insured-loss and exposure data.
+            <div style="margin-top:8px;font-size:.86rem;color:var(--muted)">Worst loss years: Philippines 2013 (Haiyan/Yolanda, 6.1% of GDP) · Vietnam 2015 (3.8% of GDP).</div>
+          </div>
+        </div>
+        <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> Material realised loss evidence + a structurally high uninsured share = a reinsurance opportunity. The gap is where climate risk becomes a balance-sheet problem.</div>
+      </section>
+
+      <!-- ===================== STRESS TEST ===================== -->
+      <section class="view" id="view-stress">
+        <p class="lead">The stress test converts country-level loss intensity into a simplified reinsurance screen across three scenarios.
+        <b>Mitigation</b> = resilience-linked underwriting + flood barriers/drainage (severity reduction) <i>and</i> better risk-transfer share (lower uninsured share).
+        Adjust the assumptions below — every figure updates live.</p>
+
+        <div class="card span2">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+            <h3>Scenario assumptions</h3>
+            <button class="resetbtn" id="reset">Reset to report defaults</button>
+          </div>
+          <div class="controls" style="margin-top:12px">
+            <div class="ctl"><label>Baseline / adverse uninsured share <b id="v-share">90%</b></label>
+              <input type="range" id="s-share" min="60" max="100" value="90" step="1"></div>
+            <div class="ctl"><label>Mitigation severity reduction <b id="v-sev">15%</b></label>
+              <input type="range" id="s-sev" min="0" max="40" value="15" step="1"></div>
+            <div class="ctl"><label>Mitigation uninsured share <b id="v-mshare">80%</b></label>
+              <input type="range" id="s-mshare" min="50" max="95" value="80" step="1"></div>
+          </div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card">
+            <h3>2030 projected uninsured loss by scenario</h3>
+            <div class="ch-note">USD bn per year. Recalculated from your assumptions above.</div>
+            <div id="ch-stress"></div>
+          </div>
+          <div class="card">
+            <h3>Mitigation effect vs baseline</h3>
+            <div class="ch-note">Uninsured-loss reduction the mitigation strategy delivers (USD bn).</div>
+            <div id="ch-reduction"></div>
+            <table id="tbl-reduction" style="margin-top:8px"></table>
+          </div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card span2">
+            <h3>Sensitivity tornado — what moves the 2030 uninsured loss most?</h3>
+            <div class="ch-note">Swing in baseline uninsured loss (USD bn) when each driver is flexed across its range. Vertical tick = reference value.</div>
+            <div id="ch-tornado"></div>
+          </div>
+        </div>
+        <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> Mitigation lowers uninsured losses but does not eliminate the need for reinsurance capacity. Uninsured-share and physical-risk pressure are the biggest levers — resilience incentives and risk transfer should be deployed together.</div>
+      </section>
+
+      <!-- ===================== STRATEGY ===================== -->
+      <section class="view" id="view-strategy">
+        <p class="lead">A dual-track strategy: fast liquidity and sovereign risk transfer for the Philippines; accumulation management and
+        resilience-linked underwriting for Vietnam — implemented through treaty pricing, product design and annual monitoring triggers.</p>
+
+        <div class="sectitle"><span class="bar"></span><h2>Recommended reinsurance strategy</h2></div>
+        <div class="card span2"><table id="tbl-recs"></table></div>
+
+        <div class="grid g2" style="margin-top:20px">
+          <div class="card">
+            <h3>Operating triggers — embed into underwriting</h3>
+            <table id="tbl-triggers"></table>
+          </div>
+          <div class="card">
+            <h3>Implementation roadmap to 2030</h3>
+            <table id="tbl-roadmap"></table>
+          </div>
+        </div>
+        <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> Recommendations should be embedded into underwriting controls — not left as one-off research conclusions. The next step is an annual client dashboard that connects exposure, losses, protection gaps and treaty actions.</div>
+      </section>
+
+      <!-- ===================== METHODOLOGY ===================== -->
+      <section class="view" id="view-method">
+        <p class="lead">A disciplined translation of macro climate, energy and socio-economic signals into underwriting action — with explicit limits and controls.</p>
+
+        <div class="grid g2">
+          <div class="card">
+            <h3>Analytical architecture</h3>
+            <table id="tbl-method"></table>
+          </div>
+          <div class="card">
+            <h3>How each indicator group is used</h3>
+            <table id="tbl-indicators"></table>
+          </div>
+        </div>
+
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card">
+            <h3>Handbook judging-criteria coverage</h3>
+            <table id="tbl-criteria"></table>
+          </div>
+          <div class="card">
+            <h3>Limitations &amp; controls</h3>
+            <table id="tbl-limits"></table>
+          </div>
+        </div>
+
+        <div class="card span2" style="margin-top:18px">
+          <h3>Key sources</h3>
+          <ul style="margin:6px 0 0;padding-left:18px;color:var(--ink);font-size:.9rem;line-height:1.7">
+            <li><b>World Bank</b> — World Development Indicators (WDI), wide format.</li>
+            <li><b>EM-DAT (CRED)</b> — hydrological, meteorological &amp; climatological disaster losses, 2000–2024.</li>
+            <li><b>Swiss Re Institute</b> — growing exposure &amp; protection gaps in Asia; <b>Aon</b> — APAC nat-cat economic loss.</li>
+            <li><b>GFDRR</b> — parametric insurance brief; <b>OECD</b> — insurance sector &amp; climate adaptation; <b>IPCC AR6</b> — climate extremes.</li>
+            <li><b>World Bank / Vietnam News</b> — Philippines cat-bond &amp; risk-insurance programmes; Typhoon Yagi insurance payouts.</li>
+          </ul>
+        </div>
+        <div class="footer">
+          MASA Hackathon 2026: R-Ignite · Team Proheck888 · Climate Physical Risk &amp; Reinsurance Protection Gap — Philippines &amp; Vietnam.
+          This dashboard is a strategic benchmarking screen built on World Bank WDI and EM-DAT evidence; it is not a treaty-pricing tool.
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+<div class="tip" id="tip"></div>
+
+<!-- ============================ ASSISTANT ============================ -->
+<button class="fab" id="fab" title="Ask about this analysis" aria-label="Open assistant">💬<span class="pulse"></span></button>
+<div class="chat" id="chat" role="dialog" aria-label="Analysis assistant">
+  <div class="chd">
+    <div class="av">R</div>
+    <div><h4>R&middot;Ignite Assistant</h4><small>Ask anything about this analysis</small></div>
+    <button class="x" id="chatx" aria-label="Close">&times;</button>
+  </div>
+  <div class="body" id="chatbody"></div>
+  <div class="chips" id="chatchips"></div>
+  <div class="foot">
+    <input id="chatin" placeholder="Ask about the model, gap, scenarios…" autocomplete="off"/>
+    <button id="chatsend" aria-label="Send">➤</button>
+  </div>
+  <div class="dis">Offline assistant — answers are grounded in this report &amp; data (no internet needed).</div>
+</div>
+
+<script>
+/* ============================ DATA (real notebook outputs) ============================ */
+const DATA = {
+  countries:{PHL:{name:"Philippines",color:"#1f6f8b"}, VNM:{name:"Vietnam",color:"#c47a32"}},
+  headline:[
+    {m:"2030 GHG excl. LULUCF (Mt CO₂e)", phl:"338", vnm:"793", meaning:"Vietnam is the larger transition-pressure watchlist market."},
+    {m:"Climate-related damage, 2000–2024", phl:"$32.65bn", vnm:"$30.49bn", meaning:"Both markets carry material realised loss evidence."},
+    {m:"Climate-related events, 2000–2024", phl:"327", vnm:"186", meaning:"Philippines has stronger catastrophe-frequency evidence."},
+    {m:"Affected population, 2000–2024", phl:"206.9M", vnm:"46.2M", meaning:"Philippines has a much larger human-impact burden."},
+    {m:"Deaths, 2000–2024", phl:"24,687", vnm:"5,609", meaning:"Higher human toll concentrated in the Philippines."},
+    {m:"2030 adverse uninsured loss", phl:"$1.90bn", vnm:"$4.56bn", meaning:"Vietnam has larger projected financial pressure under stress."}
+  ],
+  riskmap:[ // x=2030 GHG, y=events, size=damage bn
+    {c:"PHL", x:338.5, y:327, dmg:32.65},
+    {c:"VNM", x:792.9, y:186, dmg:30.49}
+  ],
+  ghgHist:{"PHL":[[1990,92.0],[1991,91.5],[1992,94.4],[1993,99.1],[1994,104.9],[1995,116.8],[1996,122.8],[1997,132.1],[1998,126.4],[1999,131.1],[2000,132.8],[2001,131.6],[2002,134.6],[2003,137.7],[2004,140.9],[2005,145.0],[2006,137.6],[2007,146.2],[2008,148.1],[2009,150.5],[2010,156.6],[2011,157.8],[2012,163.1],[2013,173.3],[2014,181.1],[2015,190.6],[2016,202.6],[2017,220.8],[2018,226.9],[2019,235.2],[2020,225.1],[2021,235.6],[2022,242.6],[2023,254.5],[2024,266.6]],
+            "VNM":[[1990,91.9],[1991,96.0],[1992,100.5],[1993,107.7],[1994,115.2],[1995,123.8],[1996,132.3],[1997,139.4],[1998,149.7],[1999,156.1],[2000,163.6],[2001,168.1],[2002,182.9],[2003,191.0],[2004,213.4],[2005,225.2],[2006,231.4],[2007,245.2],[2008,256.2],[2009,275.7],[2010,292.7],[2011,295.6],[2012,295.5],[2013,304.0],[2014,320.1],[2015,343.6],[2016,364.4],[2017,370.4],[2018,427.7],[2019,484.7],[2020,493.0],[2021,486.8],[2022,494.5],[2023,542.9],[2024,584.3]]},
+  ghgProj:{"PHL":[[2024,266.6],[2025,277.2],[2026,288.3],[2027,299.9],[2028,312.1],[2029,325.0],[2030,338.5]],
+           "VNM":[[2024,584.3],[2025,614.9],[2026,647.1],[2027,681.0],[2028,716.5],[2029,753.8],[2030,792.9]]},
+  ghg2030band:{"PHL":{base:338.5,lo:310.5,hi:352.6}, "VNM":{base:792.9,lo:631.3,hi:864.3}},
+  validation:[ {c:"PHL",actual:266.6,pred:263.7}, {c:"VNM",actual:584.3,pred:569.2} ],
+  modelComp:[ // expanding-window MAPE %
+    {m:"Naive lag-1",v:5.31,sel:false},
+    {m:"Country linear trend",v:10.76,sel:false},
+    {m:"Simple AR fixed-effect",v:3.69,sel:true},
+    {m:"Reduced interpretable FE",v:3.76,sel:false},
+    {m:"Full OLS fixed-effect",v:4.49,sel:false},
+    {m:"Ridge full FE",v:6.85,sel:false}
+  ],
+  corr:[ // target GHG vs predictor
+    {k:"CO₂ excl. LULUCF",v:0.98},{k:"Energy use per capita",v:0.96},{k:"Nitrous oxide",v:0.94},
+    {k:"Carbon intensity",v:0.81},{k:"Methane",v:0.79},{k:"Forest area share",v:0.75},
+    {k:"GDP (constant 2015$)",v:0.65},{k:"Population",v:0.55},{k:"Urban pop. share",v:0.09},
+    {k:"Renewable energy share",v:-0.55}
+  ],
+  modelMetrics:[
+    {k:"2024 holdout MAPE", phl:"2.60%", vnm:"4.77%"},
+    {k:"2024 actual (Mt)", phl:"266.6", vnm:"584.3"},
+    {k:"2024 predicted (Mt)", phl:"263.7", vnm:"569.2"},
+    {k:"Carbon intensity 2024", phl:"0.38", vnm:"1.06"},
+    {k:"Renewable energy share", phl:"28.0%", vnm:"24.2%"},
+    {k:"Urban population share", phl:"55.5%", vnm:"38.5%"},
+    {k:"GHG change 1990→2024", phl:"+190%", vnm:"+536%"}
+  ],
+  pairs:[
+    {r:1,p:"Philippines vs Vietnam",wdi:62.5,dis:69.5,comb:65.3,sel:true},
+    {r:2,p:"Indonesia vs Vietnam",wdi:71.9,dis:52.8,comb:64.3,sel:false},
+    {r:3,p:"Indonesia vs Philippines",wdi:66.7,dis:57.7,comb:63.1,sel:false},
+    {r:4,p:"Malaysia vs Philippines",wdi:56.7,dis:54.0,comb:55.6,sel:false},
+    {r:5,p:"Malaysia vs Vietnam",wdi:62.2,dis:45.4,comb:55.5,sel:false},
+    {r:6,p:"Indonesia vs Malaysia",wdi:66.2,dis:33.4,comb:53.1,sel:false}
+  ],
+  seasia:[ // damage bn, events
+    {c:"Philippines",dmg:32.65,ev:327,col:"#1f6f8b"},
+    {c:"Vietnam",dmg:30.49,ev:186,col:"#c47a32"},
+    {c:"Indonesia",dmg:12.77,ev:278,col:"#7d93a6"},
+    {c:"Malaysia",dmg:3.77,ev:72,col:"#b8c4ce"}
+  ],
+  posture:[
+    {mkt:"Philippines",cls:"phl",concern:"Typhoon/flood frequency &amp; post-event liquidity",gap:"Losses concentrated outside the insured pool",posture:"Parametric typhoon/flood covers · public-sector pools · sovereign DRF support"},
+    {mkt:"Vietnam",cls:"vnm",concern:"Flood, storm surge &amp; industrial-zone accumulation",gap:"Business-interruption &amp; flood cover remain thin",posture:"Hybrid indemnity-parametric covers · flood accumulation controls · resilience-linked underwriting"},
+    {mkt:"Both",cls:"both",concern:"High uninsured share &amp; uncertain future exposure",gap:"Protection gap remains structural",posture:"Annual protection-gap dashboard linked to pricing &amp; capacity reviews"}
+  ],
+  gapTbl:[
+    {c:"Philippines", dmg:32.65, ev:327, aff:"206.9M"},
+    {c:"Vietnam", dmg:30.49, ev:186, aff:"46.2M"}
+  ],
+  damageGdp:{ // annual damage-to-GDP % (selected years compacted to full series)
+    "PHL":[[2000,0.11],[2001,0.13],[2002,0.02],[2003,0.04],[2004,0.13],[2005,0.00],[2006,0.29],[2007,0.01],[2008,0.33],[2009,0.66],[2010,0.21],[2011,0.43],[2012,0.53],[2013,6.15],[2014,0.49],[2015,0.85],[2016,0.07],[2017,0.05],[2018,0.19],[2019,0.17],[2020,0.35],[2021,0.32],[2022,0.05],[2023,0.09],[2024,0.20]],
+    "VNM":[[2000,0.57],[2001,0.31],[2002,0.47],[2003,0.16],[2004,0.05],[2005,0.43],[2006,1.22],[2007,0.99],[2008,0.62],[2009,0.94],[2010,0.57],[2011,0.16],[2012,0.26],[2013,1.00],[2014,0.01],[2015,3.85],[2016,0.43],[2017,1.48],[2018,0.12],[2019,0.02],[2020,0.54],[2021,0.01],[2022,0.02],[2023,0.00],[2024,0.50]]
+  },
+  // stress test base inputs (USD bn) — uninsured at 90% benchmark
+  stressBase:{ "PHL":{baseUn:1.26, advUn:1.90, name:"Philippines", col:"#1f6f8b"},
+               "VNM":{baseUn:3.65, advUn:4.56, name:"Vietnam", col:"#c47a32"} },
+  tornado:{ // ref / min / max uninsured loss (USD bn)
+    "PHL":[ {f:"Physical-risk pressure",ref:1.26,lo:1.45,hi:1.76},
+            {f:"Uninsured share",ref:1.26,lo:0.98,hi:1.33},
+            {f:"Mitigation effectiveness",ref:1.26,lo:1.01,hi:1.20} ],
+    "VNM":[ {f:"Physical-risk pressure",ref:3.65,lo:4.19,hi:5.10},
+            {f:"Uninsured share",ref:3.65,lo:2.84,hi:3.85},
+            {f:"Mitigation effectiveness",ref:3.65,lo:2.92,hi:3.46} ]
+  },
+  recs:[
+    {pr:1,c:"Philippines",cls:"phl",act:"Scale parametric typhoon/flood liquidity covers using wind, rainfall, storm-track and flood-depth triggers.",val:"Faster payout, better public-sector recovery, wider insurable pool."},
+    {pr:2,c:"Philippines",cls:"phl",act:"Support sovereign or provincial risk pools for public assets, agriculture and SME recovery.",val:"Transfers fiscal shock from the government balance sheet to risk markets."},
+    {pr:3,c:"Vietnam",cls:"vnm",act:"Tighten flood / storm-surge accumulation controls for industrial and coastal portfolios.",val:"Reduces correlated loss accumulation and improves capacity allocation."},
+    {pr:4,c:"Vietnam / both",cls:"both",act:"Use resilience-linked deductibles, premium credits and annual dashboard triggers.",val:"Rewards adaptation and keeps pricing aligned with changing exposure."}
+  ],
+  triggers:[
+    {t:"Annual disaster-loss intensity",s:"Loss/GDP moves toward the adverse scenario",a:"Review aggregate limits, reinstatements and attachment points."},
+    {t:"Flood-zone exposure concentration",s:"Industrial or SME exposure clusters in high-risk zones",a:"Apply accumulation caps or require risk mitigation."},
+    {t:"Protection-gap indicator",s:"Uninsured share remains structurally high",a:"Deploy parametric capacity and public-private risk pools."}
+  ],
+  roadmap:[
+    {t:"0–6 months",a:"Build protection-gap dashboard; identify priority portfolios and provinces.",d:"WDI, EM-DAT, cedant exposure, policy coverage terms.",o:"Market-level underwriting watchlist."},
+    {t:"6–18 months",a:"Pilot parametric products and accumulation controls.",d:"Gauge/rainfall/wind, flood maps, industrial-zone exposure.",o:"Product pilots and treaty endorsement terms."},
+    {t:"18 months–2030",a:"Link annual dashboard movements to pricing, capacity and retention review.",d:"Updated losses, exposure growth, claims, insurance penetration.",o:"Formal annual climate-risk pricing review."}
+  ],
+  method:[
+    {s:"1 · WDI country-year panel",p:"Clean environmental, energy &amp; socio-economic indicators for the Philippines and Vietnam."},
+    {s:"2 · Model validation",p:"Simple AR fixed-effect model; compare 2024 actual vs predicted across six candidates."},
+    {s:"3 · 2030 projection",p:"Project total GHG excl. LULUCF as transition-pressure context with uncertainty bands."},
+    {s:"4 · EM-DAT loss evidence",p:"Hydrological, meteorological &amp; climatological disaster losses as realised physical-risk evidence."},
+    {s:"5 · Protection-gap stress test",p:"Translate damage intensity &amp; uninsured-share assumptions into reinsurance actions."}
+  ],
+  indicators:[
+    {g:"Environmental / transition",i:"Total GHG excl. LULUCF",w:"National transition-pressure &amp; policy-risk context",b:"Not a direct cause of individual disasters"},
+    {g:"Energy / decarbonisation",i:"Carbon intensity, energy mix, renewable share",w:"Whether emissions growth is decoupling from GDP",b:"Used as context where series are incomplete"},
+    {g:"Socio-economic exposure",i:"GDP, population, urbanisation",w:"Where insured assets &amp; recovery costs accumulate",b:"Needs cedant &amp; location data for pricing"},
+    {g:"Physical-risk evidence",i:"EM-DAT hydro/meteo/climatological losses",w:"Anchors analysis in realised damage &amp; affected population",b:"Economic losses may be underreported"},
+    {g:"Protection gap",i:"Indicative insured vs uninsured split",w:"Converts climate risk into balance-sheet pressure",b:"Precise pricing requires claims &amp; exposure data"}
+  ],
+  criteria:[
+    {c:"Problem framing &amp; data exploration",w:"20%",cov:"Separates Philippines and Vietnam into two distinct reinsurance problems."},
+    {c:"Modelling &amp; in-depth analysis",w:"20%",cov:"Validated AR fixed-effect model; 2024 check &amp; 2030 projection with uncertainty."},
+    {c:"Financial impact assessment",w:"20%",cov:"Converts disaster evidence into protection-gap and uninsured-loss views."},
+    {c:"Strategic recommendations",w:"20%",cov:"Links each country profile to treaty, product and monitoring actions."},
+    {c:"Storyline &amp; presentation",w:"20%",cov:"Executive overview with drill-down views for Q&amp;A."},
+    {c:"Bonus: interactive dashboard/app",w:"+10%",cov:"This live dashboard with scenario controls and links to the analysis &amp; policy context."}
+  ],
+  limits:[
+    {c:"WDI is national annual data",w:"Cannot price policy-level hazard or event footprints",ctl:"Use for macro monitoring; add cedant &amp; location data for pricing."},
+    {c:"EM-DAT losses are uneven",w:"Some economic &amp; insurance losses may be underreported",ctl:"Treat values as benchmarking inputs; validate with local claims."},
+    {c:"GHG is not a claims predictor",w:"Emissions do not directly cause individual disasters",ctl:"Use emissions as context; EM-DAT/exposure data as physical-risk evidence."},
+    {c:"2030 scenarios are uncertain",w:"Adaptation, penetration &amp; hazard intensity can change",ctl:"Use ranges and trigger-based reviews, not one fixed forecast."}
+  ]
+};
+
+/* ============================ helpers ============================ */
+const $=s=>document.querySelector(s);
+const PHL="#1f6f8b", VNM="#c47a32";
+const f1=n=>Math.round(n*10)/10;
+const f2=n=>(Math.round(n*100)/100).toFixed(2);
+function niceMax(v){ if(v<=0)return 1; const e=Math.floor(Math.log10(v)),b=Math.pow(10,e),f=v/b;
+  let nf; if(f<=1)nf=1;else if(f<=1.5)nf=1.5;else if(f<=2)nf=2;else if(f<=2.5)nf=2.5;else if(f<=3)nf=3;
+  else if(f<=4)nf=4;else if(f<=5)nf=5;else if(f<=6)nf=6;else if(f<=7)nf=7;else if(f<=8)nf=8;else nf=10; return nf*b; }
+function esc(s){return String(s).replace(/&(?!amp;|lt;|gt;)/g,'&amp;')}
+
+/* tooltip */
+const tip=$("#tip");
+function attachTips(host){
+  host.querySelectorAll("[data-tip]").forEach(el=>{
+    el.style.cursor="default";
+    el.addEventListener("mousemove",e=>{ tip.innerHTML=el.getAttribute("data-tip");
+      tip.style.opacity=1; let x=e.clientX+14,y=e.clientY+14;
+      const r=tip.getBoundingClientRect(); if(x+r.width>innerWidth-8)x=e.clientX-r.width-14;
+      if(y+r.height>innerHeight-8)y=e.clientY-r.height-14; tip.style.left=x+"px"; tip.style.top=y+"px"; });
+    el.addEventListener("mouseleave",()=>tip.style.opacity=0);
+  });
+}
+
+/* ============================ chart primitives (SVG) ============================ */
+function groupedBars(sel,{cats,series,yMax,fmt=f2,unit="",valLabels=true,W=720,H=380}){
+  const L=58,R=16,T=34,B=58, pw=W-L-R, ph=H-T-B;
+  yMax=yMax||niceMax(Math.max(...series.flatMap(s=>s.values))*1.12);
+  const ticks=[0,1,2,3,4].map(i=>yMax*i/4);
+  let g=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  ticks.forEach(t=>{const y=T+ph-(t/yMax)*ph;
+    g+=`<line class="grid-l" x1="${L}" y1="${y}" x2="${W-R}" y2="${y}"/>`;
+    g+=`<text class="axlab" x="${L-8}" y="${y+4}" text-anchor="end">${fmt(t)}</text>`;});
+  g+=`<line class="ax" x1="${L}" y1="${T+ph}" x2="${W-R}" y2="${T+ph}"/>`;
+  const gw=pw/cats.length, inner=gw*0.16, barsA=gw-2*inner, bw=barsA/series.length;
+  cats.forEach((c,i)=>{
+    const x0=L+i*gw+inner;
+    series.forEach((s,j)=>{
+      const v=s.values[i], x=x0+j*bw, h=(v/yMax)*ph, y=T+ph-h;
+      g+=`<rect class="bar-r" x="${x+bw*0.08}" y="${y}" width="${bw*0.84}" height="${Math.max(0,h)}" rx="3" fill="${s.color}"
+            data-tip="<b>${s.name}</b><br/>${c}: ${fmt(v)}${unit}"/>`;
+      if(valLabels)g+=`<text class="vlab" x="${x+bw/2}" y="${y-5}" text-anchor="middle">${fmt(v)}</text>`;
+    });
+    g+=`<text class="axlab" x="${L+i*gw+gw/2}" y="${T+ph+20}" text-anchor="middle">${c}</text>`;
+  });
+  // legend
+  let lx=L; const ly=16;
+  series.forEach(s=>{ g+=`<rect x="${lx}" y="${ly-9}" width="12" height="12" rx="2" fill="${s.color}"/>`;
+    g+=`<text class="lgd" x="${lx+17}" y="${ly+1}">${s.name}</text>`; lx+=s.name.length*7.4+40;});
+  g+=`</svg>`; const host=$(sel); host.innerHTML=g; attachTips(host);
+}
+
+function barsH(sel,{items,diverging=false,fmt=f2,W=720,Hrow=30,maxAbs=null}){
+  const L=160,R=46,T=10,B=14, H=T+B+items.length*Hrow, pw=W-L-R;
+  maxAbs=maxAbs||niceMax(Math.max(...items.map(d=>Math.abs(d.v))));
+  let g=`<svg viewBox="0 0 ${W} ${H}">`;
+  const zero=diverging? L+pw/2 : L;
+  if(diverging)g+=`<line class="ax" x1="${zero}" y1="${T}" x2="${zero}" y2="${H-B}"/>`;
+  else g+=`<line class="ax" x1="${L}" y1="${T}" x2="${L}" y2="${H-B}"/>`;
+  items.forEach((d,i)=>{
+    const cy=T+i*Hrow+Hrow/2, val=d.v;
+    let w,x,col=d.color||(val>=0?PHL:VNM);
+    if(diverging){ w=(Math.abs(val)/maxAbs)*(pw/2); x=val>=0?zero:zero-w; }
+    else { w=(Math.abs(val)/maxAbs)*pw; x=L; }
+    g+=`<rect class="bar-r" x="${x}" y="${cy-9}" width="${Math.max(1,w)}" height="18" rx="3" fill="${col}"
+          data-tip="<b>${d.k}</b><br/>${fmt(val)}"/>`;
+    g+=`<text class="axlab" x="${L-10}" y="${cy+4}" text-anchor="end">${d.k}</text>`;
+    const tx=diverging?(val>=0?x+w+6:x-6):x+w+6, ta=diverging&&val<0?"end":"start";
+    g+=`<text class="vlab" x="${tx}" y="${cy+4}" text-anchor="${ta}">${fmt(val)}</text>`;
+  });
+  g+=`</svg>`; const host=$(sel); host.innerHTML=g; attachTips(host);
+}
+
+function stacked(sel,{cats,series,fmt=f2,unit="",W=720,H=380}){
+  const L=58,R=16,T=34,B=46, pw=W-L-R, ph=H-T-B;
+  const totals=cats.map((_,i)=>series.reduce((a,s)=>a+s.values[i],0));
+  const yMax=niceMax(Math.max(...totals)*1.1);
+  const ticks=[0,1,2,3,4].map(i=>yMax*i/4);
+  let g=`<svg viewBox="0 0 ${W} ${H}">`;
+  ticks.forEach(t=>{const y=T+ph-(t/yMax)*ph;
+    g+=`<line class="grid-l" x1="${L}" y1="${y}" x2="${W-R}" y2="${y}"/>`;
+    g+=`<text class="axlab" x="${L-8}" y="${y+4}" text-anchor="end">${fmt(t)}</text>`;});
+  g+=`<line class="ax" x1="${L}" y1="${T+ph}" x2="${W-R}" y2="${T+ph}"/>`;
+  const gw=pw/cats.length, bw=Math.min(110,gw*0.5);
+  cats.forEach((c,i)=>{
+    const x=L+i*gw+gw/2-bw/2; let acc=0;
+    series.forEach(s=>{ const v=s.values[i], h=(v/yMax)*ph; acc+=v; const y=T+ph-(acc/yMax)*ph;
+      g+=`<rect class="bar-r" x="${x}" y="${y}" width="${bw}" height="${h}" fill="${s.color}"
+            data-tip="<b>${s.name}</b><br/>${c}: ${fmt(v)}${unit}"/>`;
+      if(h>20)g+=`<text class="vlab" x="${x+bw/2}" y="${y+h/2+4}" text-anchor="middle" fill="#fff">${fmt(v)}</text>`;
+    });
+    g+=`<text class="axlab" x="${L+i*gw+gw/2}" y="${T+ph+20}" text-anchor="middle">${c}</text>`;
+  });
+  let lx=L; series.forEach(s=>{ g+=`<rect x="${lx}" y="7" width="12" height="12" rx="2" fill="${s.color}"/>`;
+    g+=`<text class="lgd" x="${lx+17}" y="17">${s.name}</text>`; lx+=s.name.length*7.2+42;});
+  g+=`</svg>`; const host=$(sel); host.innerHTML=g; attachTips(host);
+}
+
+function scatter(sel,{points,xLabel,yLabel,W=720,H=400}){
+  const L=64,R=70,T=24,B=54, pw=W-L-R, ph=H-T-B;
+  const xs=points.map(p=>p.x), ys=points.map(p=>p.y);
+  const xMin=Math.min(...xs)*0.7, xMax=niceMax(Math.max(...xs)*1.08);
+  const yMin=0, yMax=niceMax(Math.max(...ys)*1.18);
+  const X=v=>L+((v-xMin)/(xMax-xMin))*pw, Y=v=>T+ph-((v-yMin)/(yMax-yMin))*ph;
+  let g=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let i=0;i<=4;i++){const yv=yMax*i/4,y=Y(yv);
+    g+=`<line class="grid-l" x1="${L}" y1="${y}" x2="${W-R}" y2="${y}"/>`;
+    g+=`<text class="axlab" x="${L-8}" y="${y+4}" text-anchor="end">${Math.round(yv)}</text>`;}
+  for(let i=0;i<=4;i++){const xv=xMin+(xMax-xMin)*i/4,x=X(xv);
+    g+=`<text class="axlab" x="${x}" y="${T+ph+20}" text-anchor="middle">${Math.round(xv)}</text>`;}
+  g+=`<line class="ax" x1="${L}" y1="${T+ph}" x2="${W-R}" y2="${T+ph}"/>`;
+  g+=`<line class="ax" x1="${L}" y1="${T}" x2="${L}" y2="${T+ph}"/>`;
+  g+=`<text class="axttl" x="${L+pw/2}" y="${H-8}" text-anchor="middle">${xLabel}</text>`;
+  g+=`<text class="axttl" transform="rotate(-90 16 ${T+ph/2})" x="16" y="${T+ph/2}" text-anchor="middle">${yLabel}</text>`;
+  const rmax=Math.max(...points.map(p=>p.dmg));
+  points.forEach(p=>{ const cx=X(p.x),cy=Y(p.y),r=20+ (p.dmg/rmax)*16; const col=DATA.countries[p.c].color;
+    g+=`<circle class="pt" cx="${cx}" cy="${cy}" r="${r}" fill="${col}" fill-opacity="0.78" stroke="${col}" stroke-width="1.5"
+          data-tip="<b>${DATA.countries[p.c].name}</b><br/>2030 GHG: ${p.x} Mt CO₂e<br/>Events: ${p.y}<br/>Damage: $${p.dmg}bn"/>`;
+    g+=`<text x="${cx}" y="${cy-r-7}" text-anchor="middle" class="vlab" style="font-size:13px">${DATA.countries[p.c].name}</text>`;
+    g+=`<text x="${cx}" y="${cy+4}" text-anchor="middle" fill="#fff" style="font-size:11.5px;font-weight:600">$${p.dmg}bn</text>`;
+  });
+  g+=`</svg>`; const host=$(sel); host.innerHTML=g; attachTips(host);
+}
+
+function lineChart(sel,{histY={},projY={},band={},W=820,H=420,yUnit=" Mt"}){
+  const L=56,R=92,T=24,B=44, pw=W-L-R, ph=H-T-B;
+  const allYears=[...new Set([...Object.values(histY),...Object.values(projY)].flat().map(p=>p[0]))];
+  const xMin=Math.min(...allYears), xMax=Math.max(...allYears);
+  const allV=[...Object.values(histY),...Object.values(projY)].flat().map(p=>p[1]).concat(Object.values(band).map(b=>b.hi));
+  const yMax=niceMax(Math.max(...allV)*1.08);
+  const X=y=>L+((y-xMin)/(xMax-xMin))*pw, Y=v=>T+ph-(v/yMax)*ph;
+  let g=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let i=0;i<=4;i++){const yv=yMax*i/4,y=Y(yv);
+    g+=`<line class="grid-l" x1="${L}" y1="${y}" x2="${W-R}" y2="${y}"/>`;
+    g+=`<text class="axlab" x="${L-8}" y="${y+4}" text-anchor="end">${Math.round(yv)}</text>`;}
+  const xticks=[1990,1995,2000,2005,2010,2015,2020,2024,2030];
+  xticks.forEach(t=>{ if(t<xMin||t>xMax)return; g+=`<text class="axlab" x="${X(t)}" y="${T+ph+19}" text-anchor="middle">${t}</text>`;});
+  // separator 2024
+  g+=`<line x1="${X(2024)}" y1="${T}" x2="${X(2024)}" y2="${T+ph}" stroke="#c8d3df" stroke-dasharray="3 3"/>`;
+  g+=`<text class="axlab" x="${X(2024)+4}" y="${T+11}" fill="#9aa8b5">projection →</text>`;
+  g+=`<line class="ax" x1="${L}" y1="${T+ph}" x2="${W-R}" y2="${T+ph}"/>`;
+  // bands
+  Object.entries(band).forEach(([c,b])=>{ const col=DATA.countries[c].color;
+    const x1=X(2024),x2=X(2030),y0=Y(projY[c][0][1]);
+    g+=`<polygon points="${x1},${y0} ${x2},${Y(b.hi)} ${x2},${Y(b.lo)}" fill="${col}" fill-opacity="0.13"/>`;});
+  // hist solid
+  Object.entries(histY).forEach(([c,pts])=>{ const col=DATA.countries[c].color;
+    const d=pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(" ");
+    g+=`<polyline points="${d}" fill="none" stroke="${col}" stroke-width="2.4"/>`;});
+  // proj dashed
+  Object.entries(projY).forEach(([c,pts])=>{ const col=DATA.countries[c].color;
+    const d=pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(" ");
+    g+=`<polyline points="${d}" fill="none" stroke="${col}" stroke-width="2.4" stroke-dasharray="6 4"/>`;});
+  // hover dots on hist
+  Object.entries(histY).forEach(([c,pts])=>{ const col=DATA.countries[c].color;
+    pts.forEach(p=>{ if(p[0]%2&&p[0]!==2024)return;
+      g+=`<circle class="pt" cx="${X(p[0])}" cy="${Y(p[1])}" r="3.4" fill="#fff" stroke="${col}" stroke-width="1.8"
+            data-tip="<b>${DATA.countries[c].name} ${p[0]}</b><br/>${p[1]}${yUnit} CO₂e"/>`;});});
+  // 2030 endpoint markers + labels + error bar
+  Object.entries(band).forEach(([c,b])=>{ const col=DATA.countries[c].color, x=X(2030);
+    g+=`<line x1="${x}" y1="${Y(b.lo)}" x2="${x}" y2="${Y(b.hi)}" stroke="${col}" stroke-width="1.6"/>`;
+    g+=`<line x1="${x-4}" y1="${Y(b.hi)}" x2="${x+4}" y2="${Y(b.hi)}" stroke="${col}" stroke-width="1.6"/>`;
+    g+=`<line x1="${x-4}" y1="${Y(b.lo)}" x2="${x+4}" y2="${Y(b.lo)}" stroke="${col}" stroke-width="1.6"/>`;
+    g+=`<circle cx="${x}" cy="${Y(b.base)}" r="4.6" fill="${col}"
+          data-tip="<b>${DATA.countries[c].name} 2030</b><br/>Base ${b.base} Mt<br/>Range ${b.lo}–${b.hi} Mt"/>`;
+    g+=`<text class="vlab" x="${x+9}" y="${Y(b.base)+4}" fill="${col}">${b.base}</text>`;});
+  // legend
+  let lx=L; Object.entries(DATA.countries).forEach(([c,o])=>{ g+=`<rect x="${lx}" y="6" width="12" height="12" rx="2" fill="${o.color}"/>`;
+    g+=`<text class="lgd" x="${lx+17}" y="16">${o.name}</text>`; lx+=o.name.length*7.4+40;});
+  g+=`<text class="lgd" x="${lx}" y="16" fill="#9aa8b5">— actual · - - projected</text>`;
+  g+=`</svg>`; const host=$(sel); host.innerHTML=g; attachTips(host);
+}
+
+function tornado(sel){
+  const W=820, rowH=34, groups=Object.entries(DATA.tornado);
+  const rows=[]; groups.forEach(([c,arr])=>arr.forEach(d=>rows.push({c,...d})));
+  const H=30+rows.length*rowH+30;
+  const L=234,R=70,T=24, pw=W-L-R;
+  const allv=rows.flatMap(d=>[d.lo,d.hi]); const xMin=0, xMax=niceMax(Math.max(...allv)*1.05);
+  const X=v=>L+(v/(xMax-xMin))*pw;
+  let g=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let i=0;i<=5;i++){const xv=xMax*i/5,x=X(xv);
+    g+=`<line class="grid-l" x1="${x}" y1="${T}" x2="${x}" y2="${T+rows.length*rowH}"/>`;
+    g+=`<text class="axlab" x="${x}" y="${T+rows.length*rowH+18}" text-anchor="middle">${f1(xv)}</text>`;}
+  rows.forEach((d,i)=>{ const cy=T+i*rowH+rowH/2, col=DATA.countries[d.c].color;
+    const xl=X(d.lo),xh=X(d.hi),xr=X(d.ref);
+    g+=`<rect class="bar-r" x="${xl}" y="${cy-9}" width="${xh-xl}" height="18" rx="3" fill="${col}" fill-opacity="0.82"
+          data-tip="<b>${DATA.countries[d.c].name} — ${d.f}</b><br/>Range $${f2(d.lo)}–$${f2(d.hi)}bn<br/>Reference $${f2(d.ref)}bn"/>`;
+    g+=`<line x1="${xr}" y1="${cy-12}" x2="${xr}" y2="${cy+12}" stroke="#0f2a43" stroke-width="1.6"/>`;
+    g+=`<text class="axlab" x="${L-10}" y="${cy+4}" text-anchor="end">${DATA.countries[d.c].name}: ${d.f}</text>`;
+    g+=`<text class="vlab" x="${xh+6}" y="${cy+4}">${f2(d.hi)}</text>`;
+  });
+  g+=`<text class="axttl" x="${L+pw/2}" y="${H-6}" text-anchor="middle">Projected 2030 uninsured loss (USD bn)</text>`;
+  g+=`</svg>`; const host=$(sel); host.innerHTML=g; attachTips(host);
+}
+
+/* ============================ table builders ============================ */
+function fillTable(sel,head,rows){ $(sel).innerHTML=`<thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead>`+
+  `<tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>`; }
+
+function buildTables(){
+  fillTable("#tbl-headline",["Metric","Philippines","Vietnam","Client meaning"],
+    DATA.headline.map(d=>[d.m,`<span class="num">${d.phl}</span>`,`<span class="num">${d.vnm}</span>`,d.meaning]));
+  fillTable("#tbl-pairs",["#","Country pair","WDI","Disaster","Combined"],
+    DATA.pairs.map(d=>[`<span class="rank">${d.r}</span>`, d.p+(d.sel?` <span class="pill sel">selected</span>`:""),
+      `<span class="num">${d.wdi}</span>`,`<span class="num">${d.dis}</span>`,`<b class="num">${d.comb}</b>`]));
+  fillTable("#tbl-posture",["Market","Primary concern","Risk-transfer gap","Recommended posture"],
+    DATA.posture.map(d=>[`<span class="pill ${d.cls}">${d.mkt}</span>`,d.concern,d.gap,d.posture]));
+  fillTable("#tbl-modelmetrics",["Measure","Philippines","Vietnam"],
+    DATA.modelMetrics.map(d=>[d.k,`<span class="num">${d.phl}</span>`,`<span class="num">${d.vnm}</span>`]));
+  fillTable("#tbl-gap",["Country","Damage 2000–24 (USD bn)","Events","Affected"],
+    DATA.gapTbl.map(d=>[d.c,`<span class="num">${f2(d.dmg)}</span>`,`<span class="num">${d.ev}</span>`,`<span class="num">${d.aff}</span>`]));
+  fillTable("#tbl-recs",["Priority","Country","Action","Expected client value"],
+    DATA.recs.map(d=>[`<span class="rank">${d.pr}</span>`,`<span class="pill ${d.cls}">${d.c}</span>`,d.act,d.val]));
+  fillTable("#tbl-triggers",["Trigger","Deterioration signal","Action"],
+    DATA.triggers.map(d=>[`<b>${d.t}</b>`,d.s,d.a]));
+  fillTable("#tbl-roadmap",["Timeframe","Client action","Decision output"],
+    DATA.roadmap.map(d=>[`<b>${d.t}</b>`,d.a,d.o]));
+  fillTable("#tbl-method",["Stage","Purpose"],DATA.method.map(d=>[`<b>${d.s}</b>`,d.p]));
+  fillTable("#tbl-indicators",["Indicator group","Why it matters","Limit / boundary"],
+    DATA.indicators.map(d=>[`<b>${d.g}</b><br/><span style="color:var(--muted);font-size:.84rem">${d.i}</span>`,d.w,d.b]));
+  fillTable("#tbl-criteria",["Criterion","Weight","Dashboard coverage"],
+    DATA.criteria.map(d=>[d.c,`<b>${d.w}</b>`,d.cov]));
+  fillTable("#tbl-limits",["Constraint","Why it matters","Control"],
+    DATA.limits.map(d=>[`<b>${d.c}</b>`,d.w,d.ctl]));
+}
+
+/* ============================ stress test (interactive) ============================ */
+function computeStress(){
+  const share=+$("#s-share").value/100, sev=+$("#s-sev").value/100, mshare=+$("#s-mshare").value/100;
+  const out={};
+  for(const c of ["PHL","VNM"]){
+    const b=DATA.stressBase[c];
+    const baseGross=b.baseUn/0.90, advGross=b.advUn/0.90, mitGross=baseGross*(1-sev);
+    out[c]={ Baseline:baseGross*share, Adverse:advGross*share, Mitigation:mitGross*mshare };
+  }
+  return out;
+}
+function renderStress(){
+  const s=computeStress();
+  const cats=["Baseline","Adverse physical-risk","Mitigation"];
+  const keys=["Baseline","Adverse","Mitigation"];
+  groupedBars("#ch-stress",{cats,
+    series:[ {name:"Philippines",color:PHL,values:keys.map(k=>s.PHL[k])},
+             {name:"Vietnam",color:VNM,values:keys.map(k=>s.VNM[k])} ],
+    fmt:v=>f2(v), unit:" bn"});
+  // reduction
+  const red=["PHL","VNM"].map(c=>({c,name:DATA.countries[c].name,col:DATA.countries[c].color,
+    base:s[c].Baseline, mit:s[c].Mitigation, cut:s[c].Baseline-s[c].Mitigation,
+    pct:(s[c].Baseline-s[c].Mitigation)/s[c].Baseline*100}));
+  barsH("#ch-reduction",{items:red.map(r=>({k:r.name,v:r.cut,color:r.col})),fmt:v=>"$"+f2(v)+"bn",Hrow:38,W:700});
+  fillTable("#tbl-reduction",["Country","Baseline","Mitigation","Reduction","%"],
+    red.map(r=>[`<span class="pill ${r.c=='PHL'?'phl':'vnm'}">${r.name}</span>`,
+      `$${f2(r.base)}bn`,`$${f2(r.mit)}bn`,`<b>$${f2(r.cut)}bn</b>`,`${f1(r.pct)}%`]));
+}
+function renderOverviewStress(){
+  const s=computeStress(); const keys=["Baseline","Adverse","Mitigation"];
+  groupedBars("#ch-ov-stress",{cats:["Baseline","Adverse","Mitigation"],
+    series:[ {name:"Philippines",color:PHL,values:keys.map(k=>s.PHL[k])},
+             {name:"Vietnam",color:VNM,values:keys.map(k=>s.VNM[k])} ], fmt:v=>f2(v), unit:" bn", H:360});
+}
+
+/* ============================ render all ============================ */
+function renderCharts(){
+  scatter("#ch-riskmap",{points:DATA.riskmap,
+    xLabel:"2030 GHG projection (Mt CO₂e) — transition pressure →",
+    yLabel:"Climate events 2000–2024 — frequency"});
+  renderOverviewStress();
+  // model
+  groupedBars("#ch-validation",{cats:["Philippines","Vietnam"],
+    series:[ {name:"2024 actual",color:"#243746",values:[266.6,584.3]},
+             {name:"2024 predicted",color:"#2f9c95",values:[263.7,569.2]} ], fmt:v=>f1(v), unit:" Mt", H:360});
+  barsH("#ch-modelcomp",{items:DATA.modelComp.map(d=>({k:d.m,v:d.v,color:d.sel?"#1f6f8b":"#b8c4ce"})),
+    fmt:v=>v.toFixed(2)+"%",Hrow:32,W:700,maxAbs:12});
+  barsH("#ch-corr",{items:DATA.corr.map(d=>({k:d.k,v:d.v})),diverging:true,fmt:v=>v.toFixed(2),Hrow:30,W:720,maxAbs:1});
+  // projection
+  lineChart("#ch-projection",{histY:DATA.ghgHist,projY:DATA.ghgProj,band:DATA.ghg2030band});
+  // gap
+  stacked("#ch-gap",{cats:["Philippines","Vietnam"],
+    series:[ {name:"Indicative insured (10%)",color:"#2f9c95",values:[3.27,3.05]},
+             {name:"Indicative uninsured (90%)",color:"#243746",values:[29.39,27.44]} ], fmt:v=>"$"+f1(v)+"bn", unit:""});
+  // intensity line
+  lineChartIntensity();
+  // sea asia
+  groupedBars("#ch-seasia",{cats:DATA.seasia.map(d=>d.c),
+    series:[ {name:"Damage (USD bn)",color:"#1f6f8b",values:DATA.seasia.map(d=>d.dmg)} ],
+    fmt:v=>f1(v), unit:" bn", H:340, valLabels:true});
+  // stress + tornado
+  renderStress(); tornado("#ch-tornado");
+}
+function lineChartIntensity(){
+  // reuse lineChart with no projection/band; scale to %GDP
+  const W=820,H=400,L=52,R=20,T=24,B=44,pw=W-L-R,ph=H-T-B;
+  const series=DATA.damageGdp; const years=series.PHL.map(p=>p[0]);
+  const xMin=2000,xMax=2024; const yMax=niceMax(Math.max(...Object.values(series).flat().map(p=>p[1]))*1.05);
+  const X=y=>L+((y-xMin)/(xMax-xMin))*pw, Y=v=>T+ph-(v/yMax)*ph;
+  let g=`<svg viewBox="0 0 ${W} ${H}">`;
+  for(let i=0;i<=4;i++){const yv=yMax*i/4,y=Y(yv);
+    g+=`<line class="grid-l" x1="${L}" y1="${y}" x2="${W-R}" y2="${y}"/>`;
+    g+=`<text class="axlab" x="${L-8}" y="${y+4}" text-anchor="end">${f1(yv)}%</text>`;}
+  [2000,2005,2010,2013,2015,2020,2024].forEach(t=>g+=`<text class="axlab" x="${X(t)}" y="${T+ph+19}" text-anchor="middle">${t}</text>`);
+  g+=`<line class="ax" x1="${L}" y1="${T+ph}" x2="${W-R}" y2="${T+ph}"/>`;
+  Object.entries(series).forEach(([c,pts])=>{ const col=DATA.countries[c].color;
+    const d=pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(" ");
+    g+=`<polyline points="${d}" fill="none" stroke="${col}" stroke-width="2.2"/>`;
+    pts.forEach(p=>{ g+=`<circle class="pt" cx="${X(p[0])}" cy="${Y(p[1])}" r="3" fill="#fff" stroke="${col}" stroke-width="1.6"
+        data-tip="<b>${DATA.countries[c].name} ${p[0]}</b><br/>Damage/GDP: ${f2(p[1])}%"/>`;});});
+  // annotate peaks
+  g+=`<text class="axlab" x="${X(2013)}" y="${Y(6.15)-7}" text-anchor="middle" fill="#1f6f8b">PHL 2013 · 6.1%</text>`;
+  g+=`<text class="axlab" x="${X(2015)}" y="${Y(3.85)-7}" text-anchor="middle" fill="#c47a32">VNM 2015 · 3.8%</text>`;
+  let lx=L; Object.entries(DATA.countries).forEach(([c,o])=>{ g+=`<rect x="${lx}" y="6" width="12" height="12" rx="2" fill="${o.color}"/>`;
+    g+=`<text class="lgd" x="${lx+17}" y="16">${o.name}</text>`; lx+=o.name.length*7.4+40;});
+  g+=`</svg>`; const host=$("#ch-intensity"); host.innerHTML=g; attachTips(host);
+}
+
+/* ============================ nav + controls ============================ */
+function activateView(v){
+  document.querySelectorAll("#nav a").forEach(x=>x.classList.toggle("active",x.dataset.view===v));
+  document.querySelectorAll(".view").forEach(s=>s.classList.remove("active"));
+  const el=$("#view-"+v); if(el)el.classList.add("active");
+  window.scrollTo(0,0);
+}
+function initNav(){ document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>activateView(a.dataset.view))); }
+
+/* ============================ grounded assistant ============================ */
+const VIEWLAB={overview:"Executive Overview",markets:"Two Markets",model:"Model & Validation",
+  projection:"2030 GHG Outlook",gap:"Protection Gap",stress:"Stress Test",strategy:"Strategy & Triggers",method:"Methodology"};
+const SUGGEST=["Why Philippines vs Vietnam?","What model did you use?","What's the 2030 projection?",
+  "Explain the protection gap","Stress-test scenarios?","Key recommendations","Limitations & data sources"];
+const FALLBACK=`I'm a grounded assistant for <b>this</b> analysis. I can explain the <b>model & validation</b>, the <b>2030 GHG projection</b>, the <b>protection gap</b>, the <b>stress-test scenarios</b>, the <b>recommendations</b>, the <b>data sources & limitations</b>, or either country's profile. Try a suggestion below 👇`;
+const KB=[
+ {view:"markets",keys:["why philippines","why vietnam","country pair","pair","why these","why those","why two","which countries","why compare","chose","chosen","selection","select countries","philippines vs vietnam","why phl","why vnm"],
+  a:`We screened six Southeast-Asia country pairs on a blended score (WDI 60% + disaster-loss 40%). <b>Philippines vs Vietnam ranked #1 (65.3/100)</b> — and crucially they are two <i>different</i> problems:<br>• <b>Philippines</b> — catastrophe-frequency & sovereign-liquidity case (327 events, 206.9M affected).<br>• <b>Vietnam</b> — flood/storm-surge accumulation & transition-pressure case (793 Mt CO₂e by 2030).`},
+ {view:"model",keys:["model","modelling","modeling","method used","algorithm","regression","fixed effect","autoregressive","ar model","how accurate","accuracy","mape","rmse","mae","validation","validate","how good is","reliable"],
+  a:`A <b>simple autoregressive fixed-effect model</b> — lagged total GHG (excl. LULUCF) plus a country fixed effect. It beat five alternatives out-of-sample:<br>• <b>2024 holdout MAPE 1.83%</b> (MAE 8.98 / RMSE 10.87 Mt)<br>• <b>Expanding-window 2015–2024 MAPE 3.69%</b><br>Kept deliberately simple so it's accurate and defensible — it's for strategic scenario context, not treaty pricing.`},
+ {view:"projection",keys:["projection","project","2030 ghg","forecast","outlook","future emissions","ghg 2030","emission forecast","predicted 2030","how much by 2030"],
+  a:`The AR model projects total GHG (excl. LULUCF) to 2030:<br>• <b>Philippines 338.5 Mt</b> (range 310.5–352.6) — about +27% vs 2024.<br>• <b>Vietnam 792.9 Mt</b> (range 631.3–864.3) — about +36% vs 2024.<br>Emissions are a <i>transition-pressure</i> signal, not a disaster predictor — so we report ranges, not a single point.`},
+ {view:"gap",keys:["protection gap","gap","uninsured","insured","90%","ninety","benchmark","coverage gap","balance sheet","underinsured"],
+  a:`The <b>protection gap</b> is the share of disaster loss that sits <i>outside</i> insurance. Public multi-year insured-claims data aren't consistently available, so we use EM-DAT economic losses with a <b>90% uninsured benchmark</b> as a strategic screen. On 2000–2024 adjusted damage:<br>• Philippines ≈ $3.3bn insured / <b>$29.4bn uninsured</b><br>• Vietnam ≈ $3.0bn insured / <b>$27.4bn uninsured</b>`},
+ {view:"stress",keys:["stress","scenario","scenarios","baseline","adverse","mitigation","stress test","what if","uninsured loss 2030","slider"],
+  a:`Three 2030 scenarios for <b>annual uninsured loss</b> (Baseline / Adverse / Mitigation):<br>• <b>Philippines:</b> $1.26bn / $1.90bn / $0.95bn<br>• <b>Vietnam:</b> $3.65bn / $4.56bn / $2.76bn<br>Mitigation = a 15% severity reduction + a better risk-transfer share. Open the view and move the sliders to test your own assumptions.`},
+ {view:"strategy",keys:["recommend","recommendation","strategy","what should","advice","action","do about","mitigate","parametric","risk transfer","treaty","triggers","roadmap"],
+  a:`A <b>dual-track</b> strategy:<br>• <b>Philippines</b> — scale parametric typhoon/flood liquidity covers + sovereign/provincial risk pools (speed of payout).<br>• <b>Vietnam</b> — tighten flood/storm-surge accumulation controls + hybrid indemnity-parametric covers + resilience-linked underwriting.<br>• <b>Both</b> — an annual protection-gap dashboard linked to pricing & capacity reviews.`},
+ {view:"method",keys:["data","dataset","source","sources","where did","wdi","em-dat","emdat","world bank","data come"],
+  a:`<b>World Bank WDI</b> (wide format) for climate, energy & socio-economic indicators; <b>EM-DAT (CRED)</b> for realised disaster losses 2000–2024; plus <b>Swiss Re, Aon, GFDRR, OECD and IPCC AR6</b> for external context. WDI is cleaned into a country-year panel for the Philippines and Vietnam.`},
+ {view:"method",keys:["limitation","limit","caveat","weakness","uncertain","uncertainty","assumption","wrong","trust","reliab"],
+  a:`Key caveats we're explicit about:<br>• WDI is national annual data → macro monitoring only, not policy-level pricing.<br>• EM-DAT economic losses can be underreported → treated as benchmarking inputs.<br>• GHG does <i>not</i> cause individual disasters → it's transition context.<br>• 2030 scenarios are uncertain → we use <b>ranges and trigger-based annual reviews</b>, not one fixed forecast.`},
+ {view:"model",keys:["indicator","correlation","correlate","which variables","features","drivers","most informative","energy use","carbon intensity","renewable"],
+  a:`Most informative WDI indicators for GHG: <b>CO₂ (r=0.98)</b>, energy use per capita (0.96), nitrous oxide (0.94), carbon intensity (0.81). <b>Renewable-energy share moves inversely (−0.55)</b>. Same-year emissions components were excluded as predictors to avoid circularity.`},
+ {view:"markets",keys:["philippines","manila","typhoon","frequency case"],
+  a:`<b>Philippines — catastrophe-frequency & sovereign-liquidity case.</b> EM-DAT records 327 climate-related events (2000–2024), ~206.9M affected and ≈$32.65bn adjusted damage. Recurring typhoons/floods create repeated post-event liquidity needs → <b>parametric covers + sovereign/public risk pools</b> are the fit.`},
+ {view:"markets",keys:["vietnam","viet nam","hanoi","accumulation","storm surge","industrial","yagi"],
+  a:`<b>Vietnam — flood accumulation & transition-pressure case.</b> ≈$30.49bn adjusted damage (2000–2024) with riverine flooding, coastal storm surge and industrial-zone accumulation, plus the larger 2030 emissions outlook (793 Mt). Fit: <b>hybrid indemnity-parametric covers, flood accumulation controls and resilience-linked underwriting</b>.`},
+ {view:"stress",keys:["tornado","sensitivity","biggest","most impact","lever","what moves","driver"],
+  a:`The <b>sensitivity tornado</b> shows what moves the 2030 uninsured loss most. The biggest levers are the <b>uninsured share</b> and <b>physical-risk (severity) pressure</b>; mitigation effectiveness has a smaller swing — which is why resilience incentives and risk transfer must be deployed <i>together</i>.`},
+ {view:"projection",keys:["why ghg","why emission","why model emission","if not predict","transition pressure","why care about emission"],
+  a:`Why model emissions if they don't cause disasters? <b>GHG is a transition-pressure signal</b> — it flags decarbonisation/policy risk and shows which market needs closer exposure monitoring (here, Vietnam). The <i>physical</i>-risk evidence comes from EM-DAT losses, not from emissions.`},
+ {view:"overview",keys:["what is this","about","reinsurance","what does this","summary","overview","main point","purpose","hackathon","team","proheck","who made","r-ignite"],
+  a:`This is a client-facing climate-risk assessment for a <b>reinsurer</b> (MASA Hackathon 2026: R-Ignite, Team Proheck888). The core question: <i>where do losses accumulate, how much stays uninsured, and which risk-transfer structures absorb the pressure by 2030?</i> — comparing the Philippines and Vietnam.`},
+ {view:"overview",keys:["how many","damage","events","affected","deaths","death","population","numbers","headline","metric","statistic"],
+  a:`Headline evidence (2000–2024):<br>• Damage: <b>Philippines $32.65bn</b> · <i>Vietnam $30.49bn</i><br>• Events: <b>327</b> · <i>186</i><br>• Affected: <b>206.9M</b> · <i>46.2M</i> · Deaths: 24,687 · 5,609<br>• 2030 GHG: <b>338 Mt</b> · <i>793 Mt</i> · 2030 adverse uninsured loss: $1.90bn · $4.56bn`}
+];
+function botAnswer(q){
+  const n=" "+q.toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ")+" ";
+  let best=null,score=0;
+  for(const k of KB){ let s=0; for(const w of k.keys){ if(n.includes(w)) s+=w.length; } if(s>score){score=s;best=k;} }
+  if(!best||score<4) return {a:FALLBACK,view:null};
+  return best;
+}
+let cbody,cin;
+function addMsg(html,who,view){
+  const m=document.createElement("div"); m.className="msg "+(who==="me"?"me":"bot");
+  let inner='<div class="b">'+html;
+  if(view) inner+='<br><span class="vbtn" data-view="'+view+'">Open the '+VIEWLAB[view]+' view →</span>';
+  inner+='</div>'; m.innerHTML=inner; cbody.appendChild(m); cbody.scrollTop=cbody.scrollHeight;
+}
+function showTyping(){
+  const m=document.createElement("div"); m.className="msg bot";
+  m.innerHTML='<div class="b"><div class="typing"><span></span><span></span><span></span></div></div>';
+  cbody.appendChild(m); cbody.scrollTop=cbody.scrollHeight; return m;
+}
+function chatSend(q){ q=(q||"").trim(); if(!q)return; addMsg(q.replace(/</g,"&lt;"),"me",null); cin.value="";
+  const r=botAnswer(q); const t=showTyping();
+  const delay=700+Math.min(1100,r.a.length*3.2);
+  setTimeout(()=>{ t.remove(); addMsg(r.a,"bot",r.view); },delay); }
+function initChat(){
+  cbody=$("#chatbody"); cin=$("#chatin");
+  addMsg("Hi 👋 I can explain anything in this dashboard — the model, the 2030 projection, the protection gap, the stress-test scenarios, the recommendations, or the data & limitations. Ask me, or tap a question below.","bot",null);
+  const cc=$("#chatchips"); cc.innerHTML=SUGGEST.map(s=>'<span class="chip">'+s+'</span>').join("");
+  cc.querySelectorAll(".chip").forEach(ch=>ch.addEventListener("click",()=>chatSend(ch.textContent)));
+  $("#fab").addEventListener("click",()=>{ const c=$("#chat"); c.classList.toggle("open"); if(c.classList.contains("open"))cin.focus(); });
+  $("#chatx").addEventListener("click",()=>$("#chat").classList.remove("open"));
+  $("#chatsend").addEventListener("click",()=>chatSend(cin.value));
+  cin.addEventListener("keydown",e=>{ if(e.key==="Enter")chatSend(cin.value); });
+  cbody.addEventListener("click",e=>{ const v=e.target.closest(".vbtn"); if(v)activateView(v.dataset.view); });
+}
+function initControls(){
+  const sync=()=>{ $("#v-share").textContent=$("#s-share").value+"%";
+    $("#v-sev").textContent=$("#s-sev").value+"%"; $("#v-mshare").textContent=$("#s-mshare").value+"%";
+    renderStress(); renderOverviewStress(); };
+  ["s-share","s-sev","s-mshare"].forEach(id=>$("#"+id).addEventListener("input",sync));
+  $("#reset").addEventListener("click",()=>{ $("#s-share").value=90; $("#s-sev").value=15; $("#s-mshare").value=80; sync(); });
+}
+
+document.addEventListener("DOMContentLoaded",()=>{ buildTables(); renderCharts(); initNav(); initControls(); initChat(); });
+</script>
+</body>
+</html>
