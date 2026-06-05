@@ -282,20 +282,6 @@
           </div>
         </div>
 
-        <div class="sectitle"><span class="bar"></span><h2>Why this country pair? — selection scorecard</h2></div>
-        <div class="grid g2">
-          <div class="card">
-            <h3>Pair shortlist (WDI 60% + disaster-loss 40%)</h3>
-            <div class="ch-note">Philippines vs Vietnam ranked #1 of six candidate Southeast-Asia pairs.</div>
-            <table id="tbl-pairs"></table>
-          </div>
-          <div class="card">
-            <h3>Southeast-Asia realised loss context, 2000–2024</h3>
-            <div class="ch-note">Adjusted climate-related disaster damage (USD bn) and event counts (EM-DAT).</div>
-            <div id="ch-seasia"></div>
-          </div>
-        </div>
-
         <div class="sectitle"><span class="bar"></span><h2>Risk-transfer gaps &amp; recommended posture</h2></div>
         <div class="card span2">
           <table id="tbl-posture"></table>
@@ -527,14 +513,6 @@ const DATA = {
     {k:"Renewable energy share", phl:"28.0%", vnm:"24.2%"},
     {k:"Urban population share", phl:"55.5%", vnm:"38.5%"},
     {k:"GHG change 1990→2024", phl:"+190%", vnm:"+536%"}
-  ],
-  pairs:[
-    {r:1,p:"Philippines vs Vietnam",wdi:62.5,dis:69.5,comb:65.3,sel:true},
-    {r:2,p:"Indonesia vs Vietnam",wdi:71.9,dis:52.8,comb:64.3,sel:false},
-    {r:3,p:"Indonesia vs Philippines",wdi:66.7,dis:57.7,comb:63.1,sel:false},
-    {r:4,p:"Malaysia vs Philippines",wdi:56.7,dis:54.0,comb:55.6,sel:false},
-    {r:5,p:"Malaysia vs Vietnam",wdi:62.2,dis:45.4,comb:55.5,sel:false},
-    {r:6,p:"Indonesia vs Malaysia",wdi:66.2,dis:33.4,comb:53.1,sel:false}
   ],
   seasia:[ // damage bn, events
     {c:"Philippines",dmg:32.65,ev:327,col:"#1f6f8b"},
@@ -814,9 +792,6 @@ function fillTable(sel,head,rows){ $(sel).innerHTML=`<thead><tr>${head.map(h=>`<
 function buildTables(){
   fillTable("#tbl-headline",["Metric","Philippines","Vietnam","Client meaning"],
     DATA.headline.map(d=>[d.m,`<span class="num">${d.phl}</span>`,`<span class="num">${d.vnm}</span>`,d.meaning]));
-  fillTable("#tbl-pairs",["#","Country pair","WDI","Disaster","Combined"],
-    DATA.pairs.map(d=>[`<span class="rank">${d.r}</span>`, d.p+(d.sel?` <span class="pill sel">selected</span>`:""),
-      `<span class="num">${d.wdi}</span>`,`<span class="num">${d.dis}</span>`,`<b class="num">${d.comb}</b>`]));
   fillTable("#tbl-posture",["Market","Primary concern","Risk-transfer gap","Recommended posture"],
     DATA.posture.map(d=>[`<span class="pill ${d.cls}">${d.mkt}</span>`,d.concern,d.gap,d.posture]));
   fillTable("#tbl-modelmetrics",["Measure","Philippines","Vietnam"],
@@ -890,10 +865,6 @@ function renderCharts(){
              {name:"Indicative uninsured (90%)",color:"#243746",values:[29.39,27.44]} ], fmt:v=>"$"+f1(v)+"bn", unit:""});
   // intensity line
   lineChartIntensity();
-  // sea asia
-  groupedBars("#ch-seasia",{cats:DATA.seasia.map(d=>d.c),
-    series:[ {name:"Damage (USD bn)",color:"#1f6f8b",values:DATA.seasia.map(d=>d.dmg)} ],
-    fmt:v=>f1(v), unit:" bn", H:340, valLabels:true});
   // stress + tornado
   renderStress(); tornado("#ch-tornado");
 }
@@ -939,7 +910,7 @@ const SUGGEST=["Why Philippines vs Vietnam?","What model did you use?","What's t
 const FALLBACK=`I'm a grounded assistant for <b>this</b> analysis. I can explain the <b>model & validation</b>, the <b>2030 GHG projection</b>, the <b>protection gap</b>, the <b>stress-test scenarios</b>, the <b>recommendations</b>, the <b>data sources & limitations</b>, or either country's profile. Try a suggestion below 👇`;
 const KB=[
  {view:"markets",keys:["why philippines","why vietnam","country pair","pair","why these","why those","why two","which countries","why compare","chose","chosen","selection","select countries","philippines vs vietnam","why phl","why vnm"],
-  a:`We screened six Southeast-Asia country pairs on a blended score (WDI 60% + disaster-loss 40%). <b>Philippines vs Vietnam ranked #1 (65.3/100)</b> — and crucially they are two <i>different</i> problems:<br>• <b>Philippines</b> — catastrophe-frequency & sovereign-liquidity case (327 events, 206.9M affected).<br>• <b>Vietnam</b> — flood/storm-surge accumulation & transition-pressure case (793 Mt CO₂e by 2030).`},
+  a:`We compared the Philippines and Vietnam because, although both are highly climate-exposed Southeast-Asia markets, they are two <i>different</i> reinsurance problems:<br>• <b>Philippines</b> — catastrophe-frequency & sovereign-liquidity case (327 events, 206.9M affected, 2000–2024).<br>• <b>Vietnam</b> — flood/storm-surge accumulation & transition-pressure case (793 Mt CO₂e projected by 2030).<br>The contrast is the point: one reinsurance strategy doesn't fit both.`},
  {view:"model",keys:["model","modelling","modeling","method used","algorithm","regression","fixed effect","autoregressive","ar model","how accurate","accuracy","mape","rmse","mae","validation","validate","how good is","reliable"],
   a:`A <b>simple autoregressive fixed-effect model</b> — lagged total GHG (excl. LULUCF) plus a country fixed effect. It beat five alternatives out-of-sample:<br>• <b>2024 holdout MAPE 1.83%</b> (MAE 8.98 / RMSE 10.87 Mt)<br>• <b>Expanding-window 2015–2024 MAPE 3.69%</b><br>Kept deliberately simple so it's accurate and defensible — it's for strategic scenario context, not treaty pricing.`},
  {view:"projection",keys:["projection","project","2030 ghg","forecast","outlook","future emissions","ghg 2030","emission forecast","predicted 2030","how much by 2030"],
