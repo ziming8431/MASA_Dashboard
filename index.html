@@ -891,6 +891,9 @@ function computeStress(){
   }
   return out;
 }
+// Fixed y-axis for the scenario chart so bars scale smoothly when sliders move
+// (max possible = adverse uninsured at 100% share = advUn/0.90). Prevents axis "jumping".
+const SCEN_YMAX=(()=>{ let m=0; for(const c of ["PHL","VNM"]){const b=DATA.stressBase[c]; m=Math.max(m,b.advUn/0.90,b.baseUn/0.90);} return niceMax(m*1.05); })();
 function renderStress(){
   const s=computeStress();
   const cats=["Baseline","Adverse physical-risk","Mitigation"];
@@ -898,7 +901,7 @@ function renderStress(){
   groupedBars("#ch-stress",{cats,
     series:[ {name:"Philippines",color:PHL,values:keys.map(k=>s.PHL[k])},
              {name:"Vietnam",color:VNM,values:keys.map(k=>s.VNM[k])} ],
-    fmt:v=>f2(v), unit:" bn"});
+    fmt:v=>f2(v), unit:" bn", yMax:SCEN_YMAX});
   // reduction
   const red=["PHL","VNM"].map(c=>({c,name:DATA.countries[c].name,col:DATA.countries[c].color,
     base:s[c].Baseline, mit:s[c].Mitigation, cut:s[c].Baseline-s[c].Mitigation,
@@ -912,7 +915,7 @@ function renderOverviewStress(){
   const s=computeStress(); const keys=["Baseline","Adverse","Mitigation"];
   groupedBars("#ch-ov-stress",{cats:["Baseline","Adverse","Mitigation"],
     series:[ {name:"Philippines",color:PHL,values:keys.map(k=>s.PHL[k])},
-             {name:"Vietnam",color:VNM,values:keys.map(k=>s.VNM[k])} ], fmt:v=>f2(v), unit:" bn", H:360});
+             {name:"Vietnam",color:VNM,values:keys.map(k=>s.VNM[k])} ], fmt:v=>f2(v), unit:" bn", H:360, yMax:SCEN_YMAX});
 }
 
 /* ============================ render all ============================ */
