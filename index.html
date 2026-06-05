@@ -195,7 +195,6 @@
       <a data-view="gap"><span class="ic">▥</span>Protection Gap</a>
       <a data-view="stress"><span class="ic">◉</span>2030 Stress Test</a>
       <a data-view="strategy"><span class="ic">✦</span>Strategy &amp; Triggers</a>
-      <a data-view="method"><span class="ic">⌗</span>Methodology</a>
     </nav>
     <div class="sidefoot">
       <div style="color:#cfe0f0;font-weight:600">Markets covered</div>
@@ -461,47 +460,6 @@
         <div class="takeaway" style="max-width:1000px"><b>Takeaway:</b> Recommendations should be embedded into underwriting controls — not left as one-off research conclusions. The next step is an annual client dashboard that connects exposure, losses, protection gaps and treaty actions.</div>
       </section>
 
-      <!-- ===================== METHODOLOGY ===================== -->
-      <section class="view" id="view-method">
-        <p class="lead">A disciplined translation of macro climate, energy and socio-economic signals into underwriting action — with explicit limits and controls.</p>
-
-        <div class="grid g2">
-          <div class="card">
-            <h3>Analytical architecture</h3>
-            <table id="tbl-method"></table>
-          </div>
-          <div class="card">
-            <h3>How each indicator group is used</h3>
-            <table id="tbl-indicators"></table>
-          </div>
-        </div>
-
-        <div class="grid g2" style="margin-top:18px">
-          <div class="card">
-            <h3>Handbook judging-criteria coverage</h3>
-            <table id="tbl-criteria"></table>
-          </div>
-          <div class="card">
-            <h3>Limitations &amp; controls</h3>
-            <table id="tbl-limits"></table>
-          </div>
-        </div>
-
-        <div class="card span2" style="margin-top:18px">
-          <h3>Key sources</h3>
-          <ul style="margin:6px 0 0;padding-left:18px;color:var(--ink);font-size:.9rem;line-height:1.7">
-            <li><b>World Bank</b> — World Development Indicators (WDI), wide format.</li>
-            <li><b>EM-DAT (CRED)</b> — hydrological, meteorological &amp; climatological disaster losses, 2000–2024.</li>
-            <li><b>Swiss Re Institute</b> — growing exposure &amp; protection gaps in Asia; <b>Aon</b> — APAC nat-cat economic loss.</li>
-            <li><b>GFDRR</b> — parametric insurance brief; <b>OECD</b> — insurance sector &amp; climate adaptation; <b>IPCC AR6</b> — climate extremes.</li>
-            <li><b>World Bank / Vietnam News</b> — Philippines cat-bond &amp; risk-insurance programmes; Typhoon Yagi insurance payouts.</li>
-          </ul>
-        </div>
-        <div class="footer">
-          MASA Hackathon 2026: R-Ignite · Team Proheck888 · Climate Physical Risk &amp; Reinsurance Protection Gap — Philippines &amp; Vietnam.
-          This dashboard is a strategic benchmarking screen built on World Bank WDI and EM-DAT evidence; it is not a treaty-pricing tool.
-        </div>
-      </section>
 
     </div>
   </div>
@@ -871,13 +829,6 @@ function buildTables(){
     DATA.triggers.map(d=>[`<b>${d.t}</b>`,d.s,d.a]));
   fillTable("#tbl-roadmap",["Timeframe","Client action","Decision output"],
     DATA.roadmap.map(d=>[`<b>${d.t}</b>`,d.a,d.o]));
-  fillTable("#tbl-method",["Stage","Purpose"],DATA.method.map(d=>[`<b>${d.s}</b>`,d.p]));
-  fillTable("#tbl-indicators",["Indicator group","Why it matters","Limit / boundary"],
-    DATA.indicators.map(d=>[`<b>${d.g}</b><br/><span style="color:var(--muted);font-size:.84rem">${d.i}</span>`,d.w,d.b]));
-  fillTable("#tbl-criteria",["Criterion","Weight","Dashboard coverage"],
-    DATA.criteria.map(d=>[d.c,`<b>${d.w}</b>`,d.cov]));
-  fillTable("#tbl-limits",["Constraint","Why it matters","Control"],
-    DATA.limits.map(d=>[`<b>${d.c}</b>`,d.w,d.ctl]));
 }
 
 /* ============================ stress test (interactive) ============================ */
@@ -999,9 +950,9 @@ const KB=[
   a:`Three 2030 scenarios for <b>annual uninsured loss</b> (Baseline / Adverse / Mitigation):<br>• <b>Philippines:</b> $1.26bn / $1.90bn / $0.95bn<br>• <b>Vietnam:</b> $3.65bn / $4.56bn / $2.76bn<br>Mitigation = a 15% severity reduction + a better risk-transfer share. Open the view and move the sliders to test your own assumptions.`},
  {view:"strategy",keys:["recommend","recommendation","strategy","what should","advice","action","do about","mitigate","parametric","risk transfer","treaty","triggers","roadmap"],
   a:`A <b>dual-track</b> strategy:<br>• <b>Philippines</b> — scale parametric typhoon/flood liquidity covers + sovereign/provincial risk pools (speed of payout).<br>• <b>Vietnam</b> — tighten flood/storm-surge accumulation controls + hybrid indemnity-parametric covers + resilience-linked underwriting.<br>• <b>Both</b> — an annual protection-gap dashboard linked to pricing & capacity reviews.`},
- {view:"method",keys:["data","dataset","source","sources","where did","wdi","em-dat","emdat","world bank","data come"],
+ {view:null,keys:["data","dataset","source","sources","where did","wdi","em-dat","emdat","world bank","data come"],
   a:`<b>World Bank WDI</b> (wide format) for climate, energy & socio-economic indicators; <b>EM-DAT (CRED)</b> for realised disaster losses 2000–2024; plus <b>Swiss Re, Aon, GFDRR, OECD and IPCC AR6</b> for external context. WDI is cleaned into a country-year panel for the Philippines and Vietnam.`},
- {view:"method",keys:["limitation","limit","caveat","weakness","uncertain","uncertainty","assumption","wrong","trust","reliab"],
+ {view:null,keys:["limitation","limit","caveat","weakness","uncertain","uncertainty","assumption","wrong","trust","reliab"],
   a:`Key caveats we're explicit about:<br>• WDI is national annual data → macro monitoring only, not policy-level pricing.<br>• EM-DAT economic losses can be underreported → treated as benchmarking inputs.<br>• GHG does <i>not</i> cause individual disasters → it's transition context.<br>• 2030 scenarios are uncertain → we use <b>ranges and trigger-based annual reviews</b>, not one fixed forecast.`},
  {view:"model",keys:["indicator","correlation","correlate","which variables","features","drivers","most informative","energy use","carbon intensity","renewable"],
   a:`Most informative WDI indicators for GHG: <b>CO₂ (r=0.98)</b>, energy use per capita (0.96), nitrous oxide (0.94), carbon intensity (0.81). <b>Renewable-energy share moves inversely (−0.55)</b>. Same-year emissions components were excluded as predictors to avoid circularity.`},
