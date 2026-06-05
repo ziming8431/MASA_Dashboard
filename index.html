@@ -301,17 +301,10 @@
           <div class="kpi both"><div class="lab">Expanding-window 2015–2024</div><div class="val">3.69%<span style="font-size:.9rem;color:var(--muted)"> MAPE</span></div><div class="meta">Best of six candidate models</div></div>
         </div>
 
-        <div class="grid g2" style="margin-top:18px">
-          <div class="card">
-            <h3>Model assurance — 2024 actual vs predicted</h3>
-            <div class="ch-note">Holdout year. Errors small enough for strategic stress-testing (Mt CO₂e).</div>
-            <div id="ch-validation"></div>
-          </div>
-          <div class="card">
-            <h3>Model selection — expanding-window MAPE</h3>
-            <div class="ch-note">Lower is better. The simple AR fixed-effect model wins on accuracy and interpretability.</div>
-            <div id="ch-modelcomp"></div>
-          </div>
+        <div class="card" style="margin-top:18px">
+          <h3>Model assurance — 2024 actual vs predicted</h3>
+          <div class="ch-note">Holdout year. Errors small enough for strategic stress-testing (Mt CO₂e).</div>
+          <div id="ch-validation"></div>
         </div>
 
         <div class="grid g2" style="margin-top:18px">
@@ -418,7 +411,7 @@
         <div class="grid g2" style="margin-top:18px">
           <div class="card span2">
             <h3>Sensitivity tornado — what moves the 2030 uninsured loss most?</h3>
-            <div class="ch-note">Swing in baseline uninsured loss (USD bn) when each driver is flexed across its range. Vertical tick = reference value.</div>
+            <div class="ch-note">Swing in baseline uninsured loss (USD bn) when each driver is flexed across its range.</div>
             <div id="ch-tornado"></div>
           </div>
         </div>
@@ -777,7 +770,6 @@ function tornado(sel){
     const xl=X(d.lo),xh=X(d.hi),xr=X(d.ref);
     g+=`<rect class="bar-r" x="${xl}" y="${cy-9}" width="${xh-xl}" height="18" rx="3" fill="${col}" fill-opacity="0.82"
           data-tip="<b>${DATA.countries[d.c].name} — ${d.f}</b><br/>Range $${f2(d.lo)}–$${f2(d.hi)}bn<br/>Reference $${f2(d.ref)}bn"/>`;
-    g+=`<line x1="${xr}" y1="${cy-12}" x2="${xr}" y2="${cy+12}" stroke="#0f2a43" stroke-width="1.6"/>`;
     g+=`<text class="axlab" x="${L-10}" y="${cy+4}" text-anchor="end">${DATA.countries[d.c].name}: ${d.f}</text>`;
     g+=`<text class="vlab" x="${xh+6}" y="${cy+4}">${f2(d.hi)}</text>`;
   });
@@ -854,8 +846,6 @@ function renderCharts(){
   groupedBars("#ch-validation",{cats:["Philippines","Vietnam"],
     series:[ {name:"2024 actual",color:"#243746",values:[266.6,584.3]},
              {name:"2024 predicted",color:"#2f9c95",values:[263.7,569.2]} ], fmt:v=>f1(v), unit:" Mt", H:360});
-  barsH("#ch-modelcomp",{items:DATA.modelComp.map(d=>({k:d.m,v:d.v,color:d.sel?"#1f6f8b":"#b8c4ce"})),
-    fmt:v=>v.toFixed(2)+"%",Hrow:32,W:700,maxAbs:12});
   barsH("#ch-corr",{items:DATA.corr.map(d=>({k:d.k,v:d.v})),diverging:true,fmt:v=>v.toFixed(2),Hrow:30,W:720,maxAbs:1});
   // projection
   lineChart("#ch-projection",{histY:DATA.ghgHist,projY:DATA.ghgProj,band:DATA.ghg2030band});
